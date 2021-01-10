@@ -17,6 +17,12 @@ MonoBehaviour:
   - Custom
   - Example
   - General
+  - main menu
+  - Dance Hall Controls
+  - Workbench Controls
   Categories:
   - {fileID: 11400000, guid: 40f9e81ff80114a47a3721228ba749ed, type: 2}
   - {fileID: 11400000, guid: a357e00cd0e437a4ebd4e94206ff5251, type: 2}
+  - {fileID: 11400000, guid: 7af6906f88d047a4b82cb8eb46ee65ca, type: 2}
+  - {fileID: 11400000, guid: 5fb69830c13dcbe4a9080953a23abab2, type: 2}
+  - {fileID: 11400000, guid: e4c2d6b0dccc8e44293f7fd92f4a66ab, type: 2}
