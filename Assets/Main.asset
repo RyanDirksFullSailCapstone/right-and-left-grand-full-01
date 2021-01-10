@@ -270,20 +270,20 @@ MonoBehaviour:
   m_notes: 
   m_onEnterShowViews:
   - Category: Main
-    InstantAction: 0
+    InstantAction: 1
     Name: Exit
   m_onEnterHideViews:
   - Category: Main
-    InstantAction: 0
+    InstantAction: 1
     Name: Main Menu
   m_onExitShowViews:
   - Category: Main
-    InstantAction: 0
-    Name: Exit
+    InstantAction: 1
+    Name: Main Menu
   m_onExitHideViews:
   - Category: Main
-    InstantAction: 0
-    Name: Main Menu
+    InstantAction: 1
+    Name: Exit
 --- !u!114 &2646081814776992625
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -372,13 +372,16 @@ MonoBehaviour:
   m_notes: 
   m_onEnterShowViews:
   - Category: Main
-    InstantAction: 0
+    InstantAction: 1
     Name: Workbench Controls
   m_onEnterHideViews: []
-  m_onExitShowViews: []
+  m_onExitShowViews:
+  - Category: Main
+    InstantAction: 1
+    Name: Main Menu
   m_onExitHideViews:
   - Category: Main
-    InstantAction: 0
+    InstantAction: 1
     Name: Workbench Controls
 --- !u!114 &3000791993110347530
 MonoBehaviour:
@@ -468,17 +471,17 @@ MonoBehaviour:
   m_notes: 
   m_onEnterShowViews:
   - Category: Main
-    InstantAction: 0
+    InstantAction: 1
     Name: Dance Hall Controls
   m_onEnterHideViews: []
   m_onExitShowViews:
   - Category: Main
-    InstantAction: 0
-    Name: Dance Hall Controls
+    InstantAction: 1
+    Name: Main Menu
   m_onExitHideViews:
   - Category: Main
-    InstantAction: 0
-    Name: Main Menu
+    InstantAction: 1
+    Name: Dance Hall Controls
 --- !u!114 &7510429850681147156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -736,22 +739,22 @@ MonoBehaviour:
   m_notes: 
   m_onEnterShowViews:
   - Category: Main
-    InstantAction: 0
+    InstantAction: 1
     Name: Main Menu
   m_onEnterHideViews:
   - Category: Main
-    InstantAction: 0
+    InstantAction: 1
     Name: Dance Hall Controls
   - Category: Main
-    InstantAction: 0
-    Name: Workbench Controls
-  - Category: Main
-    InstantAction: 0
+    InstantAction: 1
     Name: Exit
+  - Category: Main
+    InstantAction: 1
+    Name: Workbench Controls
   m_onExitShowViews: []
   m_onExitHideViews:
   - Category: Main
-    InstantAction: 0
+    InstantAction: 1
     Name: Main Menu
 --- !u!114 &8448217379641688327
 MonoBehaviour:
@@ -818,7 +821,7 @@ MonoBehaviour:
     m_id: 9c115e28-0e6a-425a-a024-fa4855509b85
     m_nodeId: 4222a6de-8d57-40d4-a567-9033ecd891ba
     m_socketName: OutputSocket_0
-    m_value: '{"ButtonCategory":"General","ButtonName":"Back","GameEvent":"","TimeDelay":1.0,"Trigger":4}'
+    m_value: '{"ButtonCategory":"General","ButtonName":"Back","GameEvent":"","TimeDelay":3.0,"Trigger":4}'
     m_valueTypeQualifiedName: Doozy.Engine.UI.Connections.UIConnection, Assembly-CSharp,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   m_nodeType: 4
