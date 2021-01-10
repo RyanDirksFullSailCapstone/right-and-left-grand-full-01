@@ -848,7 +848,7 @@ MonoBehaviour:
     InstantAction: 1
     Name: Dance Hall Controls
   - Category: Main
-    InstantAction: 0
+    InstantAction: 1
     Name: Exit
   - Category: Main
     InstantAction: 1
