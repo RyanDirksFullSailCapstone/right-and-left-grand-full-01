@@ -157,6 +157,66 @@ MonoBehaviour:
   - Category: Main
     InstantAction: 0
     Name: Dance Hall Controls
+--- !u!114 &-848779605620168377
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306e3ee67fc748fca180c1c6b99061ab, type: 3}
+  m_Name: ApplicationQuitNode
+  m_EditorClassIdentifier: 
+  ErrorNodeNameIsEmpty: 0
+  ErrorDuplicateNameFoundInGraph: 0
+  m_inputSockets:
+  - m_connectionMode: 1
+    m_connections:
+    - m_inputConnectionPoint: {x: 166, y: 4}
+      m_outputConnectionPoint: {x: -2, y: 4}
+      m_id: 4d26d295-4ce9-43d5-8d31-6c7ecd313ad9
+      m_inputNodeId: c8039855-9fd3-42da-ae23-4b2cf269bb03
+      m_inputSocketId: d646e427-860f-414f-9b70-8b1f8278e158
+      m_outputNodeId: d8ce3dae-2a89-4b3a-9fbd-42430029c5fc
+      m_outputSocketId: dd3d943d-12fb-49ab-9e2a-22095c16d069
+    m_connectionPoints:
+    - {x: -2, y: 4}
+    - {x: 166, y: 4}
+    m_direction: 0
+    m_canBeDeleted: 0
+    m_canBeReordered: 0
+    m_curveModifier: 0
+    m_height: 24
+    m_width: 180
+    m_x: 0
+    m_y: 38
+    m_id: d646e427-860f-414f-9b70-8b1f8278e158
+    m_nodeId: c8039855-9fd3-42da-ae23-4b2cf269bb03
+    m_socketName: InputSocket_0
+    m_value: '{}'
+    m_valueTypeQualifiedName: Doozy.Engine.Nody.Connections.PassthroughConnection,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_outputSockets: []
+  m_nodeType: 4
+  m_allowDuplicateNodeName: 0
+  m_allowEmptyNodeName: 0
+  m_canBeDeleted: 1
+  m_debugMode: 0
+  m_useFixedUpdate: 0
+  m_useLateUpdate: 0
+  m_useUpdate: 0
+  m_height: 80
+  m_width: 180
+  m_x: -792
+  m_y: 60
+  m_minimumInputSocketsCount: 1
+  m_minimumOutputSocketsCount: 1
+  m_graphId: 153e6a1b-4cd3-4b59-8d5e-4c9e64e1577b
+  m_id: c8039855-9fd3-42da-ae23-4b2cf269bb03
+  m_name: Application Quit
+  m_notes: 
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,11 +237,12 @@ MonoBehaviour:
   - {fileID: 3000791993110347530}
   - {fileID: 2646081814776992625}
   - {fileID: 1331725749499071607}
+  - {fileID: -848779605620168377}
   m_isSubGraph: 0
   m_version: 1
   m_description: 
   m_id: 153e6a1b-4cd3-4b59-8d5e-4c9e64e1577b
-  m_lastModified: 132547286606527937
+  m_lastModified: 132547882128734589
 --- !u!114 &1331725749499071607
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -250,6 +311,32 @@ MonoBehaviour:
     m_value: '{"ButtonCategory":"General","ButtonName":"Back","GameEvent":"","TimeDelay":3.0,"Trigger":0}'
     m_valueTypeQualifiedName: Doozy.Engine.UI.Connections.UIConnection, Assembly-CSharp,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - m_connectionMode: 0
+    m_connections:
+    - m_inputConnectionPoint: {x: 166, y: 4}
+      m_outputConnectionPoint: {x: -2, y: 4}
+      m_id: 4d26d295-4ce9-43d5-8d31-6c7ecd313ad9
+      m_inputNodeId: c8039855-9fd3-42da-ae23-4b2cf269bb03
+      m_inputSocketId: d646e427-860f-414f-9b70-8b1f8278e158
+      m_outputNodeId: d8ce3dae-2a89-4b3a-9fbd-42430029c5fc
+      m_outputSocketId: dd3d943d-12fb-49ab-9e2a-22095c16d069
+    m_connectionPoints:
+    - {x: -2, y: 4}
+    - {x: 202, y: 4}
+    m_direction: 1
+    m_canBeDeleted: 1
+    m_canBeReordered: 1
+    m_curveModifier: 0
+    m_height: 24
+    m_width: 216
+    m_x: 0
+    m_y: 86
+    m_id: dd3d943d-12fb-49ab-9e2a-22095c16d069
+    m_nodeId: d8ce3dae-2a89-4b3a-9fbd-42430029c5fc
+    m_socketName: OutputSocket_1
+    m_value: '{"ButtonCategory":"General","ButtonName":"Quit","GameEvent":"","TimeDelay":3.0,"Trigger":0}'
+    m_valueTypeQualifiedName: Doozy.Engine.UI.Connections.UIConnection, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   m_nodeType: 4
   m_allowDuplicateNodeName: 0
   m_allowEmptyNodeName: 0
@@ -258,7 +345,7 @@ MonoBehaviour:
   m_useFixedUpdate: 0
   m_useLateUpdate: 0
   m_useUpdate: 0
-  m_height: 128
+  m_height: 152
   m_width: 216
   m_x: -564
   m_y: 72
