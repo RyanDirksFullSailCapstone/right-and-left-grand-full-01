@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class ResourceHolder : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Mesh dancerMesh;
+    public Material TheMaterial;
+    public Mesh tokenLeftMesh;
+    public Mesh tokenRightMesh;
+    public Material tokenColor;
+    public Material tokenSelectedColor;
 }

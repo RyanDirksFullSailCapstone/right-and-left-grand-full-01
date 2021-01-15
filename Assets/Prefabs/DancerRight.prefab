@@ -1304,8 +1304,9 @@ GameObject:
   - component: {fileID: 2160047883329528672}
   - component: {fileID: 2160047883329528687}
   - component: {fileID: 2160047883329528686}
+  - component: {fileID: 8868741798738850475}
   m_Layer: 0
-  m_Name: Dancer1R 1
+  m_Name: DancerRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1396,6 +1397,19 @@ MonoBehaviour:
   m_animator: {fileID: 2160047883329528687}
   m_rigidBody: {fileID: 2160047883329528673}
   m_controlMode: 0
+--- !u!114 &8868741798738850475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2160047883329528685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4824dbfda3da52c48b9401aa742b23b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Selected: {fileID: 0}
 --- !u!1001 &2160047881197993199
 PrefabInstance:
   m_ObjectHideFlags: 0
