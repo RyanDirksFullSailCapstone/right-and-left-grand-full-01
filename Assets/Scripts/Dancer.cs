@@ -2,14 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum DancerStartedOnThe
+{
+    RightSide,
+    LeftSide
+}
 public class Dancer : MonoBehaviour
 {
     public GameObject Selected;
+    public DancerStartedOnThe SideIStartedOn;
+    public GameObject DancerRightToken;
+    public GameObject DancerLeftToken;
+    public GameObject DancerRightSelected;
+    public GameObject DancerLeftSelected;
+    public GameObject RightHandTarget;
+    public GameObject LeftHandTarget;
+    public GameObject DancerToMyRightBounds;
+    public GameObject DancerToMyLeftBounds;
+    public GameObject Partner;
+    public GameObject Corner;
 
     // https://www.youtube.com/watch?v=c69oZprM1oc&feature=emb_logo
     void OnMouseDown()
     {
-        Debug.Log("Clicked");
         Selected.active = !Selected.active;
     }
 
