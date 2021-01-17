@@ -37,7 +37,6 @@ public class Dancer : MonoBehaviour
                 ? Partner.GetComponent<Dancer>().LeftHandTarget.transform
                 : Partner.GetComponent<Dancer>().RightHandTarget.transform;
             ikparms.partnerHand = SideIStartedOn == DancerStartedOnThe.LeftSide ? PartnerHand.Right : PartnerHand.Left;
-            ikparms.squareDanceMove = Floor.GetComponent<Floor>().squareDanceMove;
         }
     }
 
