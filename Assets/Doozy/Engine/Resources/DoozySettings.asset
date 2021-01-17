@@ -17,7 +17,7 @@ MonoBehaviour:
   DebugBackButton: 0
   DebugGameEventListener: 0
   DebugGameEventManager: 0
-  DebugGestureListener: 1
+  DebugGestureListener: 0
   DebugGraphController: 0
   DebugKeyToAction: 0
   DebugKeyToGameEvent: 0
@@ -29,7 +29,7 @@ MonoBehaviour:
   DebugSoundyController: 0
   DebugSoundyManager: 0
   DebugSoundyPooler: 0
-  DebugTouchDetector: 1
+  DebugTouchDetector: 0
   DebugUIButton: 0
   DebugUIButtonListener: 0
   DebugUICanvas: 0

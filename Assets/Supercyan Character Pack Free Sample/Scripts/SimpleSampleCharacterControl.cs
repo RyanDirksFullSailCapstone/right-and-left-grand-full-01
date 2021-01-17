@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Doozy.Engine;
 
 public class SimpleSampleCharacterControl : MonoBehaviour
 {
@@ -12,10 +13,17 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         /// <summary>
         /// Character freely moves in the chosen direction from the perspective of the camera
         /// </summary>
-        Direct
+        Direct,
+        /// <summary>
+        /// Character freely moves in the chosen direction from the perspective of the camera
+        /// </summary>
+        SquareDanceMoves
     }
 
     public GameObject squareDanceMove;
+    public GameObject forwardSpaceTarget;
+    public Vector3 targetPosition;
+    public bool isMoving;
     [SerializeField] MoveAs dancerStatus = MoveAs.Dancer;
     [SerializeField] private float m_moveSpeed = 2;
     [SerializeField] private float m_turnSpeed = 200;
@@ -131,6 +139,10 @@ public class SimpleSampleCharacterControl : MonoBehaviour
                 TankUpdate();
                 break;
 
+            case ControlMode.SquareDanceMoves:
+                DanceUpdate();
+                break;
+
             default:
                 Debug.LogError("Unsupported state");
                 break;
@@ -138,6 +150,87 @@ public class SimpleSampleCharacterControl : MonoBehaviour
 
         m_wasGrounded = m_isGrounded;
         m_jumpInput = false;
+    }
+
+    private void OnEnable()
+    {
+        //Start listening for game events
+        Message.AddListener<GameEventMessage>(OnMessage);
+    }
+
+    private void OnDisable()
+    {
+        //Stop listening for game events
+        Message.RemoveListener<GameEventMessage>(OnMessage);
+    }
+
+    private void OnMessage(GameEventMessage message)
+    {
+        if (message == null) return;
+
+        //Debug.Log(gameObject.name + " Received the '" + message.EventName + "' game event.");
+        //Debug.Log("'" + message.EventName + "' game event was sent by the [" + message.Source.name + "] GameObject.");
+
+        switch (message.EventName)
+        {
+            case "TurnAround":
+                Debug.Log($"{gameObject.name} Turn Around as {dancerStatus} -- Needs Implemented");
+                break;
+            case "MoveForwardTank":
+                Debug.Log($"{gameObject.name} Move Forward as {dancerStatus} -- Implementing");
+
+                // set target = forwardSpaceTarget
+                targetPosition = forwardSpaceTarget.transform.position;
+                // set isMoving true
+                isMoving = true;
+
+                break;
+            case "MoveBackwardTank":
+                Debug.Log($"{gameObject.name} Move Backward as {dancerStatus} -- Needs Implemented");
+                break;
+            default: Debug.Log($"No association for {message.EventName}");
+                break;
+        }
+    }
+
+    public void DanceUpdate()
+    {
+
+        // while isMoving && not at target
+        if (isMoving && targetPosition.z > gameObject.transform.position.z)
+        {
+            //   move towards target
+            // set isMoving false or update target
+
+            float v = 1;
+            float h = 0;
+
+            bool walk = Input.GetKey(KeyCode.LeftShift);
+
+            if (v < 0)
+            {
+                if (walk)
+                {
+                    v *= m_backwardsWalkScale;
+                }
+                else
+                {
+                    v *= m_backwardRunScale;
+                }
+            }
+            else if (walk)
+            {
+                v *= m_walkScale;
+            }
+
+            m_currentV = Mathf.Lerp(m_currentV, v, Time.deltaTime * m_interpolation);
+            m_currentH = Mathf.Lerp(m_currentH, h, Time.deltaTime * m_interpolation);
+
+            transform.position += transform.forward * m_currentV * m_moveSpeed * Time.deltaTime;
+            transform.Rotate(0, m_currentH * m_turnSpeed * Time.deltaTime, 0);
+
+            m_animator.SetFloat("MoveSpeed", m_currentV);
+        }
     }
 
     private void TankUpdate()
