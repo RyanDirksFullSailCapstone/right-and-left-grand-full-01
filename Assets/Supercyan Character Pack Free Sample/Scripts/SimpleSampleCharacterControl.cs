@@ -51,6 +51,11 @@ public class SimpleSampleCharacterControl : MonoBehaviour
     {
         if (!m_animator) { gameObject.GetComponent<Animator>(); }
         if (!m_rigidBody) { gameObject.GetComponent<Animator>(); }
+
+        if (!squareDanceMove)
+        {
+            squareDanceMove = gameObject.GetComponent<IKPuppet>().squareDanceMove;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

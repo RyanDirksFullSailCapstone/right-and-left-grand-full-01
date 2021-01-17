@@ -21,6 +21,25 @@ public class Dancer : MonoBehaviour
     public GameObject DancerToMyLeftBounds;
     public GameObject Partner;
     public GameObject Corner;
+    public GameObject Floor; 
+
+    void Start()
+    {
+        if (Partner)
+        {
+            Selected = SideIStartedOn == DancerStartedOnThe.LeftSide ? DancerLeftSelected : DancerRightSelected;
+            DancerLeftToken.active = (SideIStartedOn == DancerStartedOnThe.LeftSide);
+            //DancerToMyRightBounds.active = (SideIStartedOn == DancerStartedOnThe.LeftSide);
+            DancerRightToken.active = (SideIStartedOn == DancerStartedOnThe.RightSide);
+            //DancerToMyLeftBounds.active = (SideIStartedOn == DancerStartedOnThe.RightSide);
+            IKPuppet ikparms = gameObject.GetComponent<IKPuppet>();
+            ikparms.target = SideIStartedOn == DancerStartedOnThe.LeftSide
+                ? Partner.GetComponent<Dancer>().LeftHandTarget.transform
+                : Partner.GetComponent<Dancer>().RightHandTarget.transform;
+            ikparms.partnerHand = SideIStartedOn == DancerStartedOnThe.LeftSide ? PartnerHand.Right : PartnerHand.Left;
+            ikparms.squareDanceMove = Floor.GetComponent<Floor>().squareDanceMove;
+        }
+    }
 
     // https://www.youtube.com/watch?v=c69oZprM1oc&feature=emb_logo
     void OnMouseDown()

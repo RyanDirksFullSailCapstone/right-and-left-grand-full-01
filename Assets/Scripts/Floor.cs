@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Floor : MonoBehaviour
 {
-    
+    public bool tapMakesDancerOn = false;
+    public GameObject squareDanceMove;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        squareDanceMove = Instantiate(Resources.Load("Square Dance Move")) as GameObject;
     }
 
     void OnMouseDown()
@@ -21,7 +22,7 @@ public class Floor : MonoBehaviour
     }
 
     // Update is called once per frame
-        void Update()
+    void Update()
     {
         
     }
