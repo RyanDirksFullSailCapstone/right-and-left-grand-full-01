@@ -37,7 +37,7 @@ public class Dancer : MonoBehaviour
             ikparms.target = SideIStartedOn == DancerStartedOnThe.LeftSide
                 ? Partner.GetComponent<Dancer>().LeftHandTarget.transform
                 : Partner.GetComponent<Dancer>().RightHandTarget.transform;
-            ikparms.partnerHand = SideIStartedOn == DancerStartedOnThe.LeftSide ? PartnerHand.Right : PartnerHand.Left;
+            ikparms.avatarIKPartnerHand = SideIStartedOn == DancerStartedOnThe.LeftSide ? AvatarIKGoal.RightHand : AvatarIKGoal.LeftHand;
         }
     }
 

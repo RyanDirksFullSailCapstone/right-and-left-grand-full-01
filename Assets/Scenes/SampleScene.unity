@@ -11139,6 +11139,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 118917612342307574, guid: 4911ab3ed2dd5e043bbd0bf01d1eb1ac,
         type: 3}
+      propertyPath: partnerHand
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 118917612342307574, guid: 4911ab3ed2dd5e043bbd0bf01d1eb1ac,
+        type: 3}
       propertyPath: squareDanceMove
       value: 
       objectReference: {fileID: 2034809690}
@@ -22466,3 +22471,102 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &6099408933255739912
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 224510602779888151, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: m_Name
+      value: Grid
+      objectReference: {fileID: 0}
+    - target: {fileID: 805136131845395370, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: m_Name
+      value: GridSpot3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1458385185315354026, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: m_Name
+      value: GridSpot2L
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831245263733666314, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831245263733666314, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.106
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831245263733666314, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831245263733666314, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.139
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831245263733666314, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831245263733666314, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831245263733666314, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831245263733666314, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831245263733666314, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831245263733666314, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831245263733666314, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2987183799353968297, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: m_Name
+      value: GridSpot1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5916505353153905988, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: m_Name
+      value: GridSpot2R
+      objectReference: {fileID: 0}
+    - target: {fileID: 7913654832259339684, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: m_Name
+      value: GridSpot2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8992841204698274238, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: m_Name
+      value: GridSpot4L
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0f9bc70d0b527f6468e43308f435db92, type: 3}

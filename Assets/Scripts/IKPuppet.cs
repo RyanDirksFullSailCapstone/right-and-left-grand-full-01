@@ -11,8 +11,7 @@ public enum PartnerHand
 public class IKPuppet : MonoBehaviour
 {
     public Transform target;
-    public PartnerHand partnerHand;
-    private AvatarIKGoal avatarIKPartnerHand;
+    public AvatarIKGoal avatarIKPartnerHand;
     public GameObject squareDanceMove;
 
     private Animator anim;
@@ -22,7 +21,6 @@ public class IKPuppet : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        avatarIKPartnerHand = (partnerHand == PartnerHand.Left ? AvatarIKGoal.LeftHand : AvatarIKGoal.RightHand);
     }
 
     void OnAnimatorIK(int layerIndex)

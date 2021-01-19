@@ -205,7 +205,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
             float v = 1;
             float h = 0;
 
-            bool walk = Input.GetKey(KeyCode.LeftShift);
+            bool walk = true;
 
             if (v < 0)
             {
@@ -230,6 +230,11 @@ public class SimpleSampleCharacterControl : MonoBehaviour
             transform.Rotate(0, m_currentH * m_turnSpeed * Time.deltaTime, 0);
 
             m_animator.SetFloat("MoveSpeed", m_currentV);
+        }
+        else
+        {
+            isMoving = false;
+            m_animator.SetFloat("MoveSpeed", 0);
         }
     }
 
