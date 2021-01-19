@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2831245263733666314}
+  - component: {fileID: 3139513297309503396}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -42,6 +43,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3139513297309503396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224510602779888151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 032fe432351bbcd4b99399553b9f169d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TokenMaterial01: {fileID: 2100000, guid: 4b16338c93773a0428b90575ca12bdb9, type: 2}
+  SelectedMaterial01: {fileID: 2100000, guid: 251e5828500bfd14eb9ecca53c7946c1, type: 2}
+  TokenMaterial02: {fileID: 2100000, guid: 9f79dbc3d4f54f045af7fc34ef8a094f, type: 2}
+  SelectedMaterial02: {fileID: 2100000, guid: 6fa5bddfeb062804b8af427d31efe3c4, type: 2}
+  TokenMaterial03: {fileID: 2100000, guid: 024bbcf722425a641bbbc97d4feedd7e, type: 2}
+  SelectedMaterial03: {fileID: 2100000, guid: 64f239e06bafc0c488857980e151aae1, type: 2}
+  TokenMaterial04: {fileID: 2100000, guid: c8bc543ee5909dc4caaeef1a1e33165a, type: 2}
+  SelectedMaterial04: {fileID: 2100000, guid: dfa6b8f42de08414e877382015c1cb23, type: 2}
 --- !u!1001 &855222454333817185
 PrefabInstance:
   m_ObjectHideFlags: 0

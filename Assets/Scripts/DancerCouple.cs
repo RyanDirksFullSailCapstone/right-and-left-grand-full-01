@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class DancerCouple : MonoBehaviour
 {
+    public GameObject DancerRight;
+
+    public GameObject DancerLeft;
+
+    public Material TokenMaterial;
+
+    public Material SelectedMaterial;
+
+    public int CoupleNumber;
+
     // Start is called before the first frame update
     void Start()
     {
