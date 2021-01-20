@@ -45,6 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2eb66b60318d734f8646e8b06a92235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DancerRight: {fileID: 0}
+  DancerLeft: {fileID: 0}
+  TokenMaterial: {fileID: 0}
+  SelectedMaterial: {fileID: 0}
+  CoupleNumber: 0
 --- !u!1001 &2043497068639421428
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -146,6 +151,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2043497068639421428}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8018332437964786273 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8294824705881016725, guid: 4911ab3ed2dd5e043bbd0bf01d1eb1ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 2043497068639421428}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2043497069377090692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -238,6 +249,11 @@ PrefabInstance:
       propertyPath: Partner
       value: 
       objectReference: {fileID: 117654183208738969}
+    - target: {fileID: 8868741798738850475, guid: 4911ab3ed2dd5e043bbd0bf01d1eb1ac,
+        type: 3}
+      propertyPath: Selected
+      value: 
+      objectReference: {fileID: 8018332437964786273}
     - target: {fileID: 8868741798738850475, guid: 4911ab3ed2dd5e043bbd0bf01d1eb1ac,
         type: 3}
       propertyPath: SideIStartedOn

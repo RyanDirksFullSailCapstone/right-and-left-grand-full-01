@@ -22,10 +22,14 @@ public class Dancer : MonoBehaviour
     public GameObject DancerToMyLeftBounds;
     public GameObject Partner;
     public GameObject Corner;
-    public GameObject Floor; 
+    public GameObject Floor;
+    public GameObject HomePosition;
 
     void Start()
     {
+        // trigger OnMessage SquareYourSet
+        // dancers go home
+
         if (Partner)
         {
             Selected = SideIStartedOn == DancerStartedOnThe.LeftSide ? DancerLeftSelected : DancerRightSelected;
