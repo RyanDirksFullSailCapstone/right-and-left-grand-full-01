@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Doozy.Engine;
 
@@ -20,9 +21,12 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         SquareDanceMoves
     }
 
+    public bool isFacing = false;
+    public float positionRange = 0.5f;
     public GameObject squareDanceMove;
     public GameObject forwardSpaceTarget;
     public Vector3 targetPosition;
+    private Vector3 facingTarget;
     public bool isMoving;
     [SerializeField] MoveAs dancerStatus = MoveAs.Dancer;
     [SerializeField] private float m_moveSpeed = 2;
@@ -173,17 +177,30 @@ public class SimpleSampleCharacterControl : MonoBehaviour
 
         switch (message.EventName)
         {
+            case "FaceIn":
+                // set target = forwardSpaceTarget
+                facingTarget = gameObject.GetComponent<Dancer>().FacingInTarget.transform.position;
+
+                Debug.Log($"{gameObject.name} Face In as {dancerStatus} -- {Vector3.Angle(transform.forward, facingTarget - transform.position)}");
+                // set isMoving true
+                isFacing = true;
+                break;
+            case "SquareTheSet":
+                // set target = forwardSpaceTarget
+                targetPosition = gameObject.GetComponent<Dancer>().HomePosition.transform.position;
+
+                Debug.Log($"{gameObject.name} Square The Set as {dancerStatus} -- zdiff[{Math.Abs(targetPosition.z - gameObject.transform.position.z)}] xdiff[{Math.Abs(targetPosition.x - gameObject.transform.position.x)}]");
+                // set isMoving true
+                isMoving = true;
+                break;
             case "TurnAround":
                 Debug.Log($"{gameObject.name} Turn Around as {dancerStatus} -- Needs Implemented");
                 break;
             case "MoveForwardTank":
-                Debug.Log($"{gameObject.name} Move Forward as {dancerStatus} -- Implementing");
-
                 // set target = forwardSpaceTarget
                 targetPosition = forwardSpaceTarget.transform.position;
                 // set isMoving true
                 isMoving = true;
-
                 break;
             case "MoveBackwardTank":
                 Debug.Log($"{gameObject.name} Move Backward as {dancerStatus} -- Needs Implemented");
@@ -195,10 +212,37 @@ public class SimpleSampleCharacterControl : MonoBehaviour
 
     public void DanceUpdate()
     {
+        float angle = 5f;
+        if (isFacing && (Vector3.Angle(transform.forward, facingTarget - transform.position) >
+                         angle))
+        {
+            Debug.Log($"{gameObject.name} face in as {dancerStatus} -- {Vector3.Angle(transform.forward, transform.position - facingTarget)}");
+
+            Vector3 targetDirection = new Vector3(facingTarget.x - transform.position.x, 0,
+                facingTarget.z - transform.position.z);
+
+            // The step size is equal to speed times frame time.
+            float singleStep = m_moveSpeed * Time.deltaTime;
+
+            // Rotate the forward vector towards the target direction by one step
+            Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
+
+            // Draw a ray pointing at our target in
+            Debug.DrawRay(transform.position, newDirection, Color.red);
+
+            // Calculate a rotation a step closer to the target and applies rotation to this object
+            transform.rotation = Quaternion.LookRotation(newDirection);
+        }
+        else
+        {
+            isFacing = false;
+
+        }
 
         // while isMoving && not at target
-        if (isMoving && targetPosition.z > gameObject.transform.position.z)
+        if (isMoving && (Math.Abs(targetPosition.z - gameObject.transform.position.z) > positionRange || Math.Abs(targetPosition.x - gameObject.transform.position.x) > positionRange))
         {
+
             //   move towards target
             // set isMoving false or update target
 
@@ -230,6 +274,21 @@ public class SimpleSampleCharacterControl : MonoBehaviour
             transform.Rotate(0, m_currentH * m_turnSpeed * Time.deltaTime, 0);
 
             m_animator.SetFloat("MoveSpeed", m_currentV);
+
+            // Determine which direction to rotate towards
+            Vector3 targetDirection = new Vector3(targetPosition.x - transform.position.x,0,targetPosition.z-transform.position.z);
+
+            // The step size is equal to speed times frame time.
+            float singleStep = m_moveSpeed * Time.deltaTime;
+
+            // Rotate the forward vector towards the target direction by one step
+            Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
+
+            // Draw a ray pointing at our target in
+            Debug.DrawRay(transform.position, newDirection, Color.red);
+
+            // Calculate a rotation a step closer to the target and applies rotation to this object
+            transform.rotation = Quaternion.LookRotation(newDirection);
         }
         else
         {

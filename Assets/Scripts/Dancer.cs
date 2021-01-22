@@ -22,8 +22,8 @@ public class Dancer : MonoBehaviour
     public GameObject DancerToMyLeftBounds;
     public GameObject Partner;
     public GameObject Corner;
-    public GameObject Floor;
     public GameObject HomePosition;
+    public GameObject FacingInTarget;
 
     void Start()
     {

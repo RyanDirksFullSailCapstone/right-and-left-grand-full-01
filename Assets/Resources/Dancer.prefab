@@ -1493,6 +1493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba158ff05cf30224f94bfdddec8e7635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionRange: 0.2
   squareDanceMove: {fileID: 0}
   forwardSpaceTarget: {fileID: 8654058442315772452}
   targetPosition: {x: 0, y: 0, z: 0}
@@ -1529,6 +1530,7 @@ MonoBehaviour:
   Partner: {fileID: 0}
   Corner: {fileID: 0}
   Floor: {fileID: 0}
+  HomePosition: {fileID: 0}
 --- !u!114 &118917612342307574
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Doozy.Engine;
 
 public class Floor : MonoBehaviour
 {
     public bool tapMakesDancerOn = false;
     public int squareCount = 1;
     private GameObject squareDanceMove;
-    private GameObject grid;
 
     // Start is called before the first frame update
     void Start()
