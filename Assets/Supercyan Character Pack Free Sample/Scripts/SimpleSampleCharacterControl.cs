@@ -177,6 +177,30 @@ public class SimpleSampleCharacterControl : MonoBehaviour
 
         switch (message.EventName)
         {
+            case "FaceCorner":
+                // set target = forwardSpaceTarget
+                facingTarget = gameObject.GetComponent<Dancer>().Corner.transform.position;
+
+                Debug.Log($"{gameObject.name} Face Right as {dancerStatus} -- {Vector3.Angle(transform.forward, facingTarget - transform.position)}");
+                // set isMoving true
+                isFacing = true;
+                break;
+            case "FacePartner":
+                // set target = forwardSpaceTarget
+                facingTarget = gameObject.GetComponent<Dancer>().Partner.transform.position;
+
+                Debug.Log($"{gameObject.name} Face Right as {dancerStatus} -- {Vector3.Angle(transform.forward, facingTarget - transform.position)}");
+                // set isMoving true
+                isFacing = true;
+                break;
+            case "FaceRight":
+                // set target = forwardSpaceTarget
+                facingTarget = gameObject.GetComponent<DancerTargets>().RightSpaceTarget.transform.position;
+
+                Debug.Log($"{gameObject.name} Face Right as {dancerStatus} -- {Vector3.Angle(transform.forward, facingTarget - transform.position)}");
+                // set isMoving true
+                isFacing = true;
+                break;
             case "FaceIn":
                 // set target = forwardSpaceTarget
                 facingTarget = gameObject.GetComponent<Dancer>().FacingInTarget.transform.position;
