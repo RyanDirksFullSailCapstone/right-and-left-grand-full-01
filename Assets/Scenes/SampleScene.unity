@@ -11232,7 +11232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 571a12f829f1b7346aef7de673b36156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  squareDanceMoves: 000000000100000002000000
+  SquareDanceMovesList:
+  - Allemande Left
 --- !u!4 &900763897
 Transform:
   m_ObjectHideFlags: 0

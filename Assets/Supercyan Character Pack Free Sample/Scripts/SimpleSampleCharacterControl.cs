@@ -28,6 +28,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
     public Vector3 targetPosition;
     private Vector3 facingTarget;
     public bool isMoving;
+    public bool isMovingBackwards;
     [SerializeField] MoveAs dancerStatus = MoveAs.Dancer;
     [SerializeField] private float m_moveSpeed = 2;
     [SerializeField] private float m_turnSpeed = 200;
@@ -181,7 +182,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
                 // set target = forwardSpaceTarget
                 facingTarget = gameObject.GetComponent<Dancer>().Corner.transform.position;
 
-                Debug.Log($"{gameObject.name} Face Right as {dancerStatus} -- {Vector3.Angle(transform.forward, facingTarget - transform.position)}");
+                Debug.Log($"{gameObject.name} Face Corner as {dancerStatus} -- {Vector3.Angle(transform.forward, facingTarget - transform.position)}");
                 // set isMoving true
                 isFacing = true;
                 break;
@@ -189,12 +190,13 @@ public class SimpleSampleCharacterControl : MonoBehaviour
                 // set target = forwardSpaceTarget
                 facingTarget = gameObject.GetComponent<Dancer>().Partner.transform.position;
 
-                Debug.Log($"{gameObject.name} Face Right as {dancerStatus} -- {Vector3.Angle(transform.forward, facingTarget - transform.position)}");
+                Debug.Log($"{gameObject.name} Face Partner as {dancerStatus} -- {Vector3.Angle(transform.forward, facingTarget - transform.position)}");
                 // set isMoving true
                 isFacing = true;
                 break;
             case "FaceRight":
                 // set target = forwardSpaceTarget
+                //gameObject.GetComponent<IKPuppet>().target = null
                 facingTarget = gameObject.GetComponent<DancerTargets>().RightSpaceTarget.transform.position;
 
                 Debug.Log($"{gameObject.name} Face Right as {dancerStatus} -- {Vector3.Angle(transform.forward, facingTarget - transform.position)}");
@@ -227,7 +229,10 @@ public class SimpleSampleCharacterControl : MonoBehaviour
                 isMoving = true;
                 break;
             case "MoveBackwardTank":
-                Debug.Log($"{gameObject.name} Move Backward as {dancerStatus} -- Needs Implemented");
+                // set target = forwardSpaceTarget
+                targetPosition = gameObject.GetComponent<DancerTargets>().BackwardSpaceTarget.transform.position;
+                // set isMoving true
+                isMovingBackwards = true;
                 break;
             default: Debug.Log($"No association for {message.EventName}");
                 break;
@@ -240,8 +245,6 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         if (isFacing && (Vector3.Angle(transform.forward, facingTarget - transform.position) >
                          angle))
         {
-            Debug.Log($"{gameObject.name} face in as {dancerStatus} -- {Vector3.Angle(transform.forward, transform.position - facingTarget)}");
-
             Vector3 targetDirection = new Vector3(facingTarget.x - transform.position.x, 0,
                 facingTarget.z - transform.position.z);
 
@@ -256,40 +259,42 @@ public class SimpleSampleCharacterControl : MonoBehaviour
 
             // Calculate a rotation a step closer to the target and applies rotation to this object
             transform.rotation = Quaternion.LookRotation(newDirection);
+
+            m_animator.SetFloat("MoveSpeed", m_walkScale);
         }
         else
         {
             isFacing = false;
-
+            m_animator.SetFloat("MoveSpeed", 0);
         }
 
         // while isMoving && not at target
-        if (isMoving && (Math.Abs(targetPosition.z - gameObject.transform.position.z) > positionRange || Math.Abs(targetPosition.x - gameObject.transform.position.x) > positionRange))
+        if ( (isMoving || isMovingBackwards) && (Math.Abs(targetPosition.z - gameObject.transform.position.z) > positionRange || Math.Abs(targetPosition.x - gameObject.transform.position.x) > positionRange))
         {
 
             //   move towards target
             // set isMoving false or update target
 
-            float v = 1;
+            float v = isMoving ? 1 : -1;
             float h = 0;
 
             bool walk = true;
 
-            if (v < 0)
-            {
-                if (walk)
-                {
-                    v *= m_backwardsWalkScale;
-                }
-                else
-                {
-                    v *= m_backwardRunScale;
-                }
-            }
-            else if (walk)
-            {
+            //if (v < 0)
+            //{
+            //    if (walk)
+            //    {
+            //        v *= m_backwardsWalkScale;
+            //    }
+            //    else
+            //    {
+            //        v *= m_backwardRunScale;
+            //    }
+            //}
+            //else if (walk)
+            //{
                 v *= m_walkScale;
-            }
+            //}
 
             m_currentV = Mathf.Lerp(m_currentV, v, Time.deltaTime * m_interpolation);
             m_currentH = Mathf.Lerp(m_currentH, h, Time.deltaTime * m_interpolation);
@@ -316,8 +321,9 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         }
         else
         {
-            isMoving = false;
             m_animator.SetFloat("MoveSpeed", 0);
+            isMoving = false;
+            isMovingBackwards = false;
         }
     }
 
