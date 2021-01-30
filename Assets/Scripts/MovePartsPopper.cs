@@ -65,7 +65,7 @@ public class MovePartsPopper : MonoBehaviour
                         MyMover.setFacingTarget(MyMovePartsQueue.ToArray()[currentPart].Target);
                         MyMover.setTargetPosition(MyMovePartsQueue.ToArray()[currentPart].Target);
                         MyMover.isFacing = MyMovePartsQueue.ToArray()[currentPart].IsChangeRotationInPlace;
-                        MyMover.isMoving = MyMovePartsQueue.ToArray()[currentPart].IsPositionChange;
+                        MyMover.isMoving = (MyMovePartsQueue.ToArray()[currentPart].IsBackingUp?false: MyMovePartsQueue.ToArray()[currentPart].IsPositionChange);
                         MyMover.isMovingBackwards = MyMovePartsQueue.ToArray()[currentPart].IsBackingUp;
                         MyMover.setMovingAs( MyMovePartsQueue.ToArray()[currentPart].DoMovePartAs);
                     }

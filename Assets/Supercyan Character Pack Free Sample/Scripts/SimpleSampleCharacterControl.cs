@@ -159,9 +159,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
 
     public void DanceUpdate()
     {
-        float angle = 52f;
-        if (isFacing && (Vector3.Angle(transform.forward, facingTarget - transform.position) >
-                         angle))
+        if (isFacing && (Vector3.Angle(transform.forward, transform.forward - new Vector3(facingTarget.x - transform.position.x, 0, facingTarget.z - transform.position.z)) > 0))
         {
             Vector3 targetDirection = new Vector3(facingTarget.x - transform.position.x, 0,
                 facingTarget.z - transform.position.z);

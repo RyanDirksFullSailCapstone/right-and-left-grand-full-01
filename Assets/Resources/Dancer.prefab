@@ -1498,6 +1498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba158ff05cf30224f94bfdddec8e7635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  angleBuffer: 0
   isFacing: 0
   positionRange: 0.3
   squareDanceMove: {fileID: 0}
