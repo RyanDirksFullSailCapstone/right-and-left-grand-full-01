@@ -158,10 +158,22 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         m_jumpInput = false;
     }
 
+    private bool ForwardAngleWithinRangeOf180(Vector3 target1, Vector3 target2)
+    {
+        float angleDifference = Vector3.Angle(transform.forward,
+            new Vector3(target1.x - target2.x, 0, target1.z - target2.z) - transform.forward);
+
+        if (gameObject.name == "Dancer1Right")
+        {
+            Debug.Log($"Angle {angleDifference % 180} {((180 - angleDifference) < 2)}");
+        }
+        return (angleDifference%180 < 2) || ((180 - angleDifference) < 2);
+    }
+
     public void DanceUpdate()
     {
         isReadyForNextMove = IsReadyForNextMove();
-        if (isFacing && (Vector3.Angle(transform.forward, transform.forward - new Vector3(facingTarget.x - transform.position.x, 0, facingTarget.z - transform.position.z)) > 0))
+        if (isFacing && ForwardAngleWithinRangeOf180(facingTarget,transform.position))
         {
             Vector3 targetDirection = new Vector3(facingTarget.x - transform.position.x, 0,
                 facingTarget.z - transform.position.z);

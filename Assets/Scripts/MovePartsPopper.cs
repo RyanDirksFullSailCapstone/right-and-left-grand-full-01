@@ -97,11 +97,21 @@ public class MovePartsPopper : MonoBehaviour
         if (message == null) return;
         switch (message.EventName)
         {
+            case "AllemandeLeft":
+                //face corner
+                MyMovePartsQueue.Add(new MovePart(message.EventName, gameObject.GetComponent<Dancer>().Corner.transform.position, MoveAs.Dancer, false, false, true));
+                // Contact arm: left
+                // Contact type: forearm grip
+                // Motion Pinwheel around left forearm grip
+                // IsComplete: facepartner
+                MyMovePartsQueue.Add(new MovePart(message.EventName, gameObject.GetComponent<Dancer>().Partner.transform.position, MoveAs.Dancer, false, false, true));
+
+                break;
             case "FaceCorner":
                 MyMovePartsQueue.Add(new MovePart(message.EventName,gameObject.GetComponent<Dancer>().Corner.transform.position,MoveAs.Dancer,false,false,true));
                 break;
             case "FacePartner":
-                MyMovePartsQueue.Add(new MovePart(message.EventName,gameObject.GetComponent<Dancer>().Corner.transform.position, MoveAs.Dancer, false, false, true));
+                MyMovePartsQueue.Add(new MovePart(message.EventName,gameObject.GetComponent<Dancer>().Partner.transform.position, MoveAs.Dancer, false, false, true));
                 break;
             case "FaceLeft":
                 MyMovePartsQueue.Add(new MovePart(message.EventName, gameObject.GetComponent<DancerTargets>().LeftSpaceTarget.transform.position, MoveAs.Dancer, false, false, true));
