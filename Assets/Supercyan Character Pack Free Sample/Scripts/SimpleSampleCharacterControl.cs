@@ -21,6 +21,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         SquareDanceMoves
     }
 
+    public bool isReadyForNextMove;
     public bool isFacing = false;
     public float positionRange = 0.5f;
     public GameObject squareDanceMove;
@@ -159,6 +160,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
 
     public void DanceUpdate()
     {
+        isReadyForNextMove = IsReadyForNextMove();
         if (isFacing && (Vector3.Angle(transform.forward, transform.forward - new Vector3(facingTarget.x - transform.position.x, 0, facingTarget.z - transform.position.z)) > 0))
         {
             Vector3 targetDirection = new Vector3(facingTarget.x - transform.position.x, 0,
@@ -227,13 +229,16 @@ public class SimpleSampleCharacterControl : MonoBehaviour
             float singleStep = m_moveSpeed * Time.deltaTime;
 
             // Rotate the forward vector towards the target direction by one step
-            Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
+            if (!isMovingBackwards)
+            {
+                Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
 
-            // Draw a ray pointing at our target in
-            Debug.DrawRay(transform.position, newDirection, Color.red);
+                // Draw a ray pointing at our target in
+                Debug.DrawRay(transform.position, newDirection, Color.red);
 
-            // Calculate a rotation a step closer to the target and applies rotation to this object
-            transform.rotation = Quaternion.LookRotation(newDirection);
+                // Calculate a rotation a step closer to the target and applies rotation to this object
+                transform.rotation = Quaternion.LookRotation(newDirection);
+            }
         }
         else
         {
