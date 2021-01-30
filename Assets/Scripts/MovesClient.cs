@@ -59,16 +59,16 @@ public class MovesClient : MonoBehaviour
                 // if dancer is situated StateReadyTo.Move rather than Relate - always true at this point
 
 
-                GameEventMessage.SendEvent(thisMovePartsList[currentPart].Name);
-                // check conditions for complete
-                bool isComplete = CheckComplete(thisMovePartsList[currentPart].Name,thisMovePartsList[currentPart].Target);
-                if (isComplete)
-                {
-                    if (nextPart > currentPart)
-                        currentPart++;
-                    else
-                        isMoving = false;
-                }
+                //GameEventMessage.SendEvent(thisMovePartsList[currentPart].Name);
+                //// check conditions for complete
+                //bool isComplete = CheckComplete(thisMovePartsList[currentPart].Name,thisMovePartsList[currentPart].Target);
+                //if (isComplete)
+                //{
+                //    if (nextPart > currentPart)
+                //        currentPart++;
+                //    else
+                //        isMoving = false;
+                //}
             }
         }
     }
@@ -93,15 +93,4 @@ public class MovesClient : MonoBehaviour
     }
 
 
-}
-public class MovePart:MonoBehaviour
-{
-    public string Name { get; set; }
-    public Vector3 Target { get; set; }
-
-    public MovePart(string name, Vector3 target)
-    {
-        Name = name;
-        Target = target;
-    }
 }

@@ -25,7 +25,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
     public float positionRange = 0.5f;
     public GameObject squareDanceMove;
     public GameObject forwardSpaceTarget;
-    public Vector3 targetPosition;
+    private Vector3 targetPosition;
     private Vector3 facingTarget;
     public bool isMoving;
     public bool isMovingBackwards;
@@ -157,91 +157,9 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         m_jumpInput = false;
     }
 
-    private void OnEnable()
-    {
-        //Start listening for game events
-        Message.AddListener<GameEventMessage>(OnMessage);
-    }
-
-    private void OnDisable()
-    {
-        //Stop listening for game events
-        Message.RemoveListener<GameEventMessage>(OnMessage);
-    }
-
-    private void OnMessage(GameEventMessage message)
-    {
-        if (message == null) return;
-
-        //Debug.Log(gameObject.name + " Received the '" + message.EventName + "' game event.");
-        //Debug.Log("'" + message.EventName + "' game event was sent by the [" + message.Source.name + "] GameObject.");
-
-        switch (message.EventName)
-        {
-            case "FaceCorner":
-                // set target = forwardSpaceTarget
-                facingTarget = gameObject.GetComponent<Dancer>().Corner.transform.position;
-
-                Debug.Log($"{gameObject.name} Face Corner as {dancerStatus} -- {Vector3.Angle(transform.forward, facingTarget - transform.position)}");
-                // set isMoving true
-                isFacing = true;
-                break;
-            case "FacePartner":
-                // set target = forwardSpaceTarget
-                facingTarget = gameObject.GetComponent<Dancer>().Partner.transform.position;
-
-                Debug.Log($"{gameObject.name} Face Partner as {dancerStatus} -- {Vector3.Angle(transform.forward, facingTarget - transform.position)}");
-                // set isMoving true
-                isFacing = true;
-                break;
-            case "FaceRight":
-                // set target = forwardSpaceTarget
-                //gameObject.GetComponent<IKPuppet>().target = null
-                facingTarget = gameObject.GetComponent<DancerTargets>().RightSpaceTarget.transform.position;
-
-                Debug.Log($"{gameObject.name} Face Right as {dancerStatus} -- {Vector3.Angle(transform.forward, facingTarget - transform.position)}");
-                // set isMoving true
-                isFacing = true;
-                break;
-            case "FaceIn":
-                // set target = forwardSpaceTarget
-                facingTarget = gameObject.GetComponent<Dancer>().FacingInTarget.transform.position;
-
-                Debug.Log($"{gameObject.name} Face In as {dancerStatus} -- {Vector3.Angle(transform.forward, facingTarget - transform.position)}");
-                // set isMoving true
-                isFacing = true;
-                break;
-            case "SquareTheSet":
-                // set target = forwardSpaceTarget
-                targetPosition = gameObject.GetComponent<Dancer>().HomePosition.transform.position;
-
-                Debug.Log($"{gameObject.name} Square The Set as {dancerStatus} -- zdiff[{Math.Abs(targetPosition.z - gameObject.transform.position.z)}] xdiff[{Math.Abs(targetPosition.x - gameObject.transform.position.x)}]");
-                // set isMoving true
-                isMoving = true;
-                break;
-            case "TurnAround":
-                Debug.Log($"{gameObject.name} Turn Around as {dancerStatus} -- Needs Implemented");
-                break;
-            case "MoveForwardTank":
-                // set target = forwardSpaceTarget
-                targetPosition = forwardSpaceTarget.transform.position;
-                // set isMoving true
-                isMoving = true;
-                break;
-            case "MoveBackwardTank":
-                // set target = forwardSpaceTarget
-                targetPosition = gameObject.GetComponent<DancerTargets>().BackwardSpaceTarget.transform.position;
-                // set isMoving true
-                isMovingBackwards = true;
-                break;
-            default: Debug.Log($"No association for {message.EventName}");
-                break;
-        }
-    }
-
     public void DanceUpdate()
     {
-        float angle = 5f;
+        float angle = 52f;
         if (isFacing && (Vector3.Angle(transform.forward, facingTarget - transform.position) >
                          angle))
         {
@@ -412,5 +330,25 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         {
             m_animator.SetTrigger("Jump");
         }
+    }
+
+    public bool IsReadyForNextMove()
+    {
+        return m_isGrounded && !isMoving && !isMovingBackwards && !isFacing;
+    }
+
+    public void setFacingTarget(Vector3 transformPosition)
+    {
+        facingTarget = transformPosition;
+    }
+
+    public void setTargetPosition(Vector3 target)
+    {
+        targetPosition = target;
+    }
+
+    public void setMovingAs(MoveAs movingAs)
+    {
+        m_movingAs = movingAs;
     }
 }

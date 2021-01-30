@@ -1401,7 +1401,7 @@ GameObject:
   - component: {fileID: 118917612342307574}
   - component: {fileID: 4634351847118533979}
   - component: {fileID: 5099289852110832399}
-  - component: {fileID: 2606204264754375363}
+  - component: {fileID: 3968833009139075728}
   m_Layer: 0
   m_Name: Dancer
   m_TagString: Untagged
@@ -1502,7 +1502,6 @@ MonoBehaviour:
   positionRange: 0.3
   squareDanceMove: {fileID: 0}
   forwardSpaceTarget: {fileID: 8654058442315772452}
-  targetPosition: {x: 0, y: 0, z: 0}
   isMoving: 0
   isMovingBackwards: 0
   dancerStatus: 0
@@ -1582,7 +1581,7 @@ MonoBehaviour:
   BackwardSpaceTarget: {fileID: 8443885654951088717}
   RightSpaceTarget: {fileID: 7850920429325271595}
   LeftSpaceTarget: {fileID: 2922353393800247722}
---- !u!114 &2606204264754375363
+--- !u!114 &3968833009139075728
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1591,15 +1590,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2160047883329528685}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c8fc1f469b7a449b6072b4ed89eace, type: 3}
+  m_Script: {fileID: 11500000, guid: 21065828783ae45449345a765a6fffb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DoMoveWithDancer: {fileID: 0}
-  thisMovePartsList: []
-  squareDanceMove: {fileID: 0}
-  SquareDanceMovesList:
-  - Allemande Left
-  isMoving: 0
 --- !u!1 &2922353393800247722
 GameObject:
   m_ObjectHideFlags: 0
