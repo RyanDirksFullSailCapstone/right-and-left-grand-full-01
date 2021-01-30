@@ -8566,6 +8566,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 491571459407829291, guid: 0f9bc70d0b527f6468e43308f435db92,
         type: 3}
+      propertyPath: angleBuffer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 491571459407829291, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
       propertyPath: positionRange
       value: 0.07
       objectReference: {fileID: 0}
@@ -8574,6 +8579,11 @@ PrefabInstance:
       propertyPath: squareDanceMove
       value: 
       objectReference: {fileID: 2100952862}
+    - target: {fileID: 491571460145589851, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: angleBuffer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 491571460145589851, guid: 0f9bc70d0b527f6468e43308f435db92,
         type: 3}
       propertyPath: positionRange
@@ -8596,6 +8606,11 @@ PrefabInstance:
       objectReference: {fileID: 2100952862}
     - target: {fileID: 1313742658438862925, guid: 0f9bc70d0b527f6468e43308f435db92,
         type: 3}
+      propertyPath: angleBuffer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313742658438862925, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
       propertyPath: positionRange
       value: 0.07
       objectReference: {fileID: 0}
@@ -8604,6 +8619,11 @@ PrefabInstance:
       propertyPath: squareDanceMove
       value: 
       objectReference: {fileID: 2100952862}
+    - target: {fileID: 1313742659445944125, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: angleBuffer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1313742659445944125, guid: 0f9bc70d0b527f6468e43308f435db92,
         type: 3}
       propertyPath: positionRange
@@ -8721,6 +8741,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4297813875043478114, guid: 0f9bc70d0b527f6468e43308f435db92,
         type: 3}
+      propertyPath: angleBuffer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4297813875043478114, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
       propertyPath: positionRange
       value: 0.07
       objectReference: {fileID: 0}
@@ -8729,6 +8754,11 @@ PrefabInstance:
       propertyPath: squareDanceMove
       value: 
       objectReference: {fileID: 2100952862}
+    - target: {fileID: 4297813875379526930, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: angleBuffer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4297813875379526930, guid: 0f9bc70d0b527f6468e43308f435db92,
         type: 3}
       propertyPath: positionRange
@@ -8746,6 +8776,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5120185152218377933, guid: 0f9bc70d0b527f6468e43308f435db92,
         type: 3}
+      propertyPath: angleBuffer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5120185152218377933, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
       propertyPath: positionRange
       value: 0.07
       objectReference: {fileID: 0}
@@ -8754,6 +8789,11 @@ PrefabInstance:
       propertyPath: squareDanceMove
       value: 
       objectReference: {fileID: 2100952862}
+    - target: {fileID: 5120185152286185917, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: angleBuffer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5120185152286185917, guid: 0f9bc70d0b527f6468e43308f435db92,
         type: 3}
       propertyPath: positionRange
@@ -11428,7 +11468,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.29111958, y: 0, z: 0, w: 0.95668674}
-  m_LocalPosition: {x: 1, y: 4, z: -4}
+  m_LocalPosition: {x: 0, y: 4, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
