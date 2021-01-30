@@ -7,13 +7,12 @@ public class Floor : MonoBehaviour
 {
     public bool tapMakesDancerOn = false;
     public int squareCount = 1;
-    private GameObject squareDanceMove;
+    private GameObject myGrid;
 
     // Start is called before the first frame update
     void Start()
     {
-        //squareDanceMove =
-        //    Instantiate(Resources.Load("Grid")) as GameObject;
+        myGrid=Instantiate(Resources.Load("Grid")) as GameObject;
         //squareDanceMove =
         //    Instantiate(Resources.Load("Square Dance Move")) as GameObject;
         //for (int i = 0; i < squareCount; i++)
@@ -28,6 +27,12 @@ public class Floor : MonoBehaviour
         //                Quaternion.identity) as GameObject;
         //    }
         //}
+    }
+
+    public void ResetSquare()
+    {
+        Destroy(myGrid);
+        myGrid = Instantiate(Resources.Load("Grid"), new Vector3(0,0,0), Quaternion.identity) as GameObject;
     }
 
     void OnMouseDown()

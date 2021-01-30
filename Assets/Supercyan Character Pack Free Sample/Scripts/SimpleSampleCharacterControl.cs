@@ -59,12 +59,20 @@ public class SimpleSampleCharacterControl : MonoBehaviour
     private bool m_isGrounded;
 
     private List<Collider> m_collisions = new List<Collider>();
+    private IKPuppet myIkPuppet;
+    public HandPosition leftHandPosition { get; set; }
+    public Vector3 leftHandTarget { get; set; }
 
 
     private void Awake()
     {
         if (!m_animator) { gameObject.GetComponent<Animator>(); }
         if (!m_rigidBody) { gameObject.GetComponent<Animator>(); }
+
+        if (!myIkPuppet)
+        {
+            myIkPuppet = gameObject.GetComponent<IKPuppet>();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -124,7 +132,6 @@ public class SimpleSampleCharacterControl : MonoBehaviour
 
     private void Update()
     {
-        m_movingAs = squareDanceMove.GetComponent<SquareDanceMove>().moveAs;
         if (!m_jumpInput && Input.GetKey(KeyCode.Space))
         {
             m_jumpInput = true;
@@ -158,22 +165,12 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         m_jumpInput = false;
     }
 
-    private bool ForwardAngleWithinRangeOf180(Vector3 target1, Vector3 target2)
-    {
-        float angleDifference = Vector3.Angle(transform.forward,
-            new Vector3(target1.x - target2.x, 0, target1.z - target2.z) - transform.forward);
-
-        if (gameObject.name == "Dancer1Right")
-        {
-            Debug.Log($"Angle {angleDifference % 180} {(180 - angleDifference)}");
-        }
-        return (angleDifference % 180 < 2) || ((180 - angleDifference) < 2);
-    }
-
     public void DanceUpdate()
     {
         isReadyForNextMove = IsReadyForNextMove();
-
+        myIkPuppet.movingAs = m_movingAs;
+        myIkPuppet.LeftHandTarget = leftHandTarget;
+        myIkPuppet.LeftHandPosition = leftHandPosition;
         if (isFacing)
         {
             float AngleDifference = Vector3.Angle(transform.forward,

@@ -37,21 +37,9 @@ public class MovePartsPopper : MonoBehaviour
             if (LastPartIndex > nextPart && currentPart == nextPart)
             {
                 nextPart++;
-                if (gameObject.name == "Dancer1Right")
-                {
-                    Debug.Log($"incremented nextpart to:{nextPart}");
-                }
             }
 
             isMoving = nextPart > currentPart;
-            //if (nextPart > currentPart)
-            //{
-            //    if (!isMoving)
-            //    {
-            //        currentPart++;
-            //    }
-            //    isMoving = true;
-            //}
 
             if (isMoving)                                                               
             {
@@ -60,16 +48,14 @@ public class MovePartsPopper : MonoBehaviour
                     if (nextPart > currentPart)
                     {
                         currentPart++;
-                        if (gameObject.name == "Dancer1Right")
-                        {
-                            Debug.Log($"incremented currentpart to:{currentPart}");
-                        }
                         MyMover.setFacingTarget(MyMovePartsQueue.ToArray()[currentPart].Target);
                         MyMover.setTargetPosition(MyMovePartsQueue.ToArray()[currentPart].Target);
                         MyMover.isFacing = MyMovePartsQueue.ToArray()[currentPart].IsChangeRotationInPlace;
-                        MyMover.isMoving = (MyMovePartsQueue.ToArray()[currentPart].IsBackingUp?false: MyMovePartsQueue.ToArray()[currentPart].IsPositionChange);
+                        MyMover.isMoving = (!MyMovePartsQueue.ToArray()[currentPart].IsBackingUp && MyMovePartsQueue.ToArray()[currentPart].IsPositionChange);
                         MyMover.isMovingBackwards = MyMovePartsQueue.ToArray()[currentPart].IsBackingUp;
                         MyMover.setMovingAs( MyMovePartsQueue.ToArray()[currentPart].DoMovePartAs);
+                        MyMover.leftHandPosition = MyMovePartsQueue.ToArray()[currentPart].LeftHandPosition;
+                        MyMover.leftHandTarget = MyMovePartsQueue.ToArray()[currentPart].LeftHandTarget;
                     }
                     else
                         isMoving = false;
@@ -99,11 +85,11 @@ public class MovePartsPopper : MonoBehaviour
             case "AllemandeLeft":
                 //face corner
                 MyMovePartsQueue.Add(new MovePart(message.EventName, gameObject.GetComponent<Dancer>().Corner.transform.position, MoveAs.Dancer, false, false, true));
-                // Contact arm: left
-                // Contact type: forearm grip
                 // Motion Pinwheel around left forearm grip
+                MyMovePartsQueue.Add(new MovePart(message.EventName, gameObject.GetComponent<Dancer>().Corner.GetComponent<DancerTargets>().LeftSpaceTarget.transform.position, MoveAs.Dancer, false, true, false,HandPosition.ForearmGrip, gameObject.GetComponent<Dancer>().Corner.GetComponent<Dancer>().LeftHandTarget.transform.position));
+
                 // IsComplete: facepartner
-                MyMovePartsQueue.Add(new MovePart(message.EventName, gameObject.GetComponent<Dancer>().Partner.transform.position, MoveAs.Dancer, false, false, true));
+                // MyMovePartsQueue.Add(new MovePart(message.EventName, gameObject.GetComponent<Dancer>().Partner.transform.position, MoveAs.Dancer, false, false, true));
 
                 break;
             case "FaceCorner":
@@ -119,7 +105,7 @@ public class MovePartsPopper : MonoBehaviour
                 MyMovePartsQueue.Add(new MovePart(message.EventName, gameObject.GetComponent<DancerTargets>().RightSpaceTarget.transform.position, MoveAs.Dancer, false, false, true));
                 break;
             case "FaceIn":
-                MyMovePartsQueue.Add(new MovePart(message.EventName, gameObject.GetComponent<Dancer>().FacingInTarget.transform.position, MoveAs.Dancer, false, false, true));
+                MyMovePartsQueue.Add(new MovePart(message.EventName, gameObject.GetComponent<Dancer>().FacingInTarget.transform.position, MoveAs.Couple, false, false, true));
                 break;
             case "SquareTheSet":
                 MyMovePartsQueue.Add(new MovePart(message.EventName, gameObject.GetComponent<Dancer>().HomePosition.transform.position, MoveAs.Couple, false, true, false));

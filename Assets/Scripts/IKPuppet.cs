@@ -12,11 +12,15 @@ public class IKPuppet : MonoBehaviour
 {
     public Transform target;
     public AvatarIKGoal avatarIKPartnerHand;
-    public GameObject squareDanceMove;
+    public MoveAs movingAs = MoveAs.Couple;
 
     private Animator anim;
 
     private float weight = 1f;
+
+    public Vector3 LeftHandTarget { get; set; }
+    public HandPosition LeftHandPosition { get; set; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +29,12 @@ public class IKPuppet : MonoBehaviour
 
     void OnAnimatorIK(int layerIndex)
     {
-        if (squareDanceMove.GetComponent<SquareDanceMove>().moveAs == MoveAs.Couple)
+        if (LeftHandPosition == HandPosition.ForearmGrip)
+        {
+            anim.SetIKPosition(AvatarIKGoal.LeftHand, LeftHandTarget);
+            anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1f);
+        }
+        if (movingAs == MoveAs.Couple)
         {
             anim.SetIKPosition(avatarIKPartnerHand, target.position);
             anim.SetIKPositionWeight(avatarIKPartnerHand, weight);
