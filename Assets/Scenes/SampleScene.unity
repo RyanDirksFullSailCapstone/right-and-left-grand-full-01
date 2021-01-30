@@ -8712,6 +8712,16 @@ PrefabInstance:
       propertyPath: squareDanceMove
       value: 
       objectReference: {fileID: 2100952862}
+    - target: {fileID: 1246035227446965484, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: moveQueueArray.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246035228318925724, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: moveQueueArray.Array.size
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1313742658438862925, guid: 0f9bc70d0b527f6468e43308f435db92,
         type: 3}
       propertyPath: angleBuffer
@@ -8837,6 +8847,16 @@ PrefabInstance:
       propertyPath: squareDanceMove
       value: 
       objectReference: {fileID: 2100952862}
+    - target: {fileID: 3187494248854718373, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: moveQueueArray.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3187494249056563413, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: moveQueueArray.Array.size
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3500286125586179136, guid: 0f9bc70d0b527f6468e43308f435db92,
         type: 3}
       propertyPath: m_Enabled
@@ -8846,6 +8866,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4095304222473045699, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: moveQueueArray.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4095304222942310835, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: moveQueueArray.Array.size
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4297813875043478114, guid: 0f9bc70d0b527f6468e43308f435db92,
         type: 3}
@@ -8971,6 +9001,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7917510416066670659, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: moveQueueArray.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7917510416669869875, guid: 0f9bc70d0b527f6468e43308f435db92,
+        type: 3}
+      propertyPath: moveQueueArray.Array.size
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8383918239653076875, guid: 0f9bc70d0b527f6468e43308f435db92,
         type: 3}

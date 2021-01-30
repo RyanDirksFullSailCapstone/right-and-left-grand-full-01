@@ -165,37 +165,49 @@ public class SimpleSampleCharacterControl : MonoBehaviour
 
         if (gameObject.name == "Dancer1Right")
         {
-            Debug.Log($"Angle {angleDifference % 180} {((180 - angleDifference) < 2)}");
+            Debug.Log($"Angle {angleDifference % 180} {(180 - angleDifference)}");
         }
-        return (angleDifference%180 < 2) || ((180 - angleDifference) < 2);
+        return (angleDifference % 180 < 2) || ((180 - angleDifference) < 2);
     }
 
     public void DanceUpdate()
     {
         isReadyForNextMove = IsReadyForNextMove();
-        if (isFacing && ForwardAngleWithinRangeOf180(facingTarget,transform.position))
+
+        if (isFacing)
         {
-            Vector3 targetDirection = new Vector3(facingTarget.x - transform.position.x, 0,
-                facingTarget.z - transform.position.z);
+            float AngleDifference = Vector3.Angle(transform.forward,
+                new Vector3(facingTarget.x - transform.position.x, 0, facingTarget.z - transform.position.z) -
+                transform.forward);
 
-            // The step size is equal to speed times frame time.
-            float singleStep = m_moveSpeed * Time.deltaTime;
+            if (gameObject.name == "Dancer1Right")
+            {
+                Debug.Log($"Angle Facing Target: {(Vector3.Angle(transform.forward, new Vector3(facingTarget.x - transform.position.x, 0, facingTarget.z - transform.position.z) - transform.forward))} AngleDifference {AngleDifference} Result {(AngleDifference % 180 < 2) || ((180 - AngleDifference) < 2)} " );
+            }
+            if(!(AngleDifference % 180 < 2 || (180 - AngleDifference) < 2))
+            {
+                Vector3 targetDirection = new Vector3(facingTarget.x - transform.position.x, 0,
+                    facingTarget.z - transform.position.z);
 
-            // Rotate the forward vector towards the target direction by one step
-            Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
+                // The step size is equal to speed times frame time.
+                float singleStep = m_moveSpeed * Time.deltaTime;
 
-            // Draw a ray pointing at our target in
-            Debug.DrawRay(transform.position, newDirection, Color.red);
+                // Rotate the forward vector towards the target direction by one step
+                Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
 
-            // Calculate a rotation a step closer to the target and applies rotation to this object
-            transform.rotation = Quaternion.LookRotation(newDirection);
+                // Draw a ray pointing at our target in
+                Debug.DrawRay(transform.position, newDirection, Color.red);
 
-            m_animator.SetFloat("MoveSpeed", m_walkScale);
-        }
-        else
-        {
-            isFacing = false;
-            m_animator.SetFloat("MoveSpeed", 0);
+                // Calculate a rotation a step closer to the target and applies rotation to this object
+                transform.rotation = Quaternion.LookRotation(newDirection);
+
+                m_animator.SetFloat("MoveSpeed", m_walkScale);
+            }
+            else
+            {
+                isFacing = false;
+                m_animator.SetFloat("MoveSpeed", 0);
+            }
         }
 
         // while isMoving && not at target

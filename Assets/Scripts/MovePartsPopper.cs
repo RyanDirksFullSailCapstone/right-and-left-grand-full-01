@@ -11,7 +11,9 @@ public class MovePartsPopper : MonoBehaviour
     private bool isMoving;
     private SimpleSampleCharacterControl MyMover;
 
-    // Start is called before the first frame update
+    public string lastCall;
+
+// Start is called before the first frame update
     void Start()
     {
         MyMover = gameObject.GetComponent<SimpleSampleCharacterControl>();
@@ -90,11 +92,8 @@ public class MovePartsPopper : MonoBehaviour
 
     private void OnMessage(GameEventMessage message)
     {
-        if (gameObject.name == "Dancer1Right")
-        {
-            Debug.Log($"adding {message.EventName}");
-        }
         if (message == null) return;
+        lastCall = message.EventName;
         switch (message.EventName)
         {
             case "AllemandeLeft":
