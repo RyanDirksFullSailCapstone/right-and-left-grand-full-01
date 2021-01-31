@@ -20,6 +20,7 @@ public class MovePart
 
     public string Name { get; private set; }
     public Vector3 Target { get; private set; }
+    public GameObject TargetGameObject { get; private set; }
     public MoveAs DoMovePartAs { get; private set; }
     public bool IsBackingUp { get; private set; }
     public bool IsPositionChange { get; private set; }
@@ -28,6 +29,8 @@ public class MovePart
     public HandPosition RightHandPosition { get; private set; }
     public Vector3 LeftHandTarget { get; private set; }
     public Vector3 RightHandTarget { get; private set; }
+    public bool DoUpdateTargetPosition { get; private set; }
+
 
 
     public MovePart(string name, Vector3 target, MoveAs doMovePartAs,bool isBackingUp, bool isPositionChange, bool isChangeRotationInPlace)
@@ -38,9 +41,12 @@ public class MovePart
         IsBackingUp = isBackingUp;
         IsPositionChange = isPositionChange;
         IsChangeRotationInPlace = isChangeRotationInPlace;
+        LeftHandPosition = HandPosition.None;
+        TargetGameObject = null;
+        DoUpdateTargetPosition = false;
     }
 
-    public MovePart(string name, Vector3 target, MoveAs doMovePartAs, bool isBackingUp, bool isPositionChange, bool isChangeRotationInPlace, HandPosition leftHandPosition, Vector3 leftHandTarget)
+    public MovePart(string name, Vector3 target, MoveAs doMovePartAs, bool isBackingUp, bool isPositionChange, bool isChangeRotationInPlace, HandPosition leftHandPosition, Vector3 leftHandTarget, GameObject targetGameObject, bool doUpdateTargetPosition)
     {
         Name = name;
         Target = target;
@@ -50,5 +56,7 @@ public class MovePart
         IsChangeRotationInPlace = isChangeRotationInPlace;
         LeftHandPosition = leftHandPosition;
         LeftHandTarget = leftHandTarget;
+        TargetGameObject = targetGameObject;
+        DoUpdateTargetPosition = doUpdateTargetPosition;
     }
 }

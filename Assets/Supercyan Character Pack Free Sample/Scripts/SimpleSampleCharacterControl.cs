@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using Doozy.Engine;
 
@@ -28,6 +29,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
     public GameObject forwardSpaceTarget;
     private Vector3 targetPosition;
     private Vector3 facingTarget;
+    public GameObject targetGameObject { get; set; }
     public bool isMoving;
     public bool isMovingBackwards;
     [SerializeField] MoveAs dancerStatus = MoveAs.Dancer;
@@ -60,6 +62,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
 
     private List<Collider> m_collisions = new List<Collider>();
     private IKPuppet myIkPuppet;
+    public bool doUpdateTargetPosition;
     public HandPosition leftHandPosition { get; set; }
     public Vector3 leftHandTarget { get; set; }
 
@@ -243,8 +246,18 @@ public class SimpleSampleCharacterControl : MonoBehaviour
 
             m_animator.SetFloat("MoveSpeed", m_currentV);
 
+            Vector3 targetDirection;
             // Determine which direction to rotate towards
-            Vector3 targetDirection = new Vector3(targetPosition.x - transform.position.x,0,targetPosition.z-transform.position.z);
+            if (!doUpdateTargetPosition)
+            {
+                targetDirection = new Vector3(targetPosition.x - transform.position.x, 0,
+                    targetPosition.z - transform.position.z);
+            }
+            else
+            {
+                targetDirection = new Vector3(targetGameObject.transform.position.x - transform.position.x, 0,
+                    targetGameObject.transform.position.z - transform.position.z);
+            }
 
             // The step size is equal to speed times frame time.
             float singleStep = m_moveSpeed * Time.deltaTime;
