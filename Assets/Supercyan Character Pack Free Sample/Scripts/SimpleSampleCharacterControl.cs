@@ -180,10 +180,6 @@ public class SimpleSampleCharacterControl : MonoBehaviour
                 new Vector3(facingTarget.x - transform.position.x, 0, facingTarget.z - transform.position.z) -
                 transform.forward);
 
-            if (gameObject.name == "Dancer1Right")
-            {
-                Debug.Log($"Angle Facing Target: {(Vector3.Angle(transform.forward, new Vector3(facingTarget.x - transform.position.x, 0, facingTarget.z - transform.position.z) - transform.forward))} AngleDifference {AngleDifference} Result {(AngleDifference % 180 < 2) || ((180 - AngleDifference) < 2)} " );
-            }
             if(!(AngleDifference % 180 < 2 || (180 - AngleDifference) < 2))
             {
                 Vector3 targetDirection = new Vector3(facingTarget.x - transform.position.x, 0,
@@ -211,9 +207,18 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         }
 
         // while isMoving && not at target
-        if ( (isMoving || isMovingBackwards) && (Math.Abs(targetPosition.z - gameObject.transform.position.z) > positionRange || Math.Abs(targetPosition.x - gameObject.transform.position.x) > positionRange))
+        if ( 
+            (isMoving || isMovingBackwards) && 
+            (
+                ( !doUpdateTargetPosition && (Math.Abs(targetPosition.z - gameObject.transform.position.z) > positionRange || Math.Abs(targetPosition.x - gameObject.transform.position.x) > positionRange)) ||
+                (  doUpdateTargetPosition && (Math.Abs(targetGameObject.transform.position.z - gameObject.transform.position.z) > .36f || Math.Abs(targetGameObject.transform.position.x - gameObject.transform.position.x) > .36f))
+            )
+        )
         {
-
+            //if (gameObject.name == "Dancer1Right")
+            //{
+            //    Debug.Log($"{Math.Abs(targetGameObject.transform.position.z - gameObject.transform.position.z)} {Math.Abs(targetGameObject.transform.position.x - gameObject.transform.position.x)} {doUpdateTargetPosition} {(Math.Abs(targetPosition.z - gameObject.transform.position.z) > positionRange || Math.Abs(targetPosition.x - gameObject.transform.position.x) > positionRange)} {(Math.Abs(targetGameObject.transform.position.z - gameObject.transform.position.z) > positionRange || Math.Abs(targetGameObject.transform.position.x - gameObject.transform.position.x) > positionRange)}");
+            //}
             //   move towards target
             // set isMoving false or update target
 
