@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using Doozy.Engine;
+using Unity.Transforms;
 
 public class SimpleSampleCharacterControl : MonoBehaviour
 {
@@ -168,6 +169,39 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         m_jumpInput = false;
     }
 
+    public CompleteCondition CompleteCondition { get; set; }
+
+    private bool HasMetCompleteCondition(CompleteCondition completeCondition)
+    {
+        if (gameObject.name == "Dancer1Right")
+        {
+            Debug.Log($"CompleteCondition {CompleteCondition} {completeCondition}");
+        }
+        switch (completeCondition)
+        {
+            case CompleteCondition.SeePartner:
+                GameObject partner = gameObject.GetComponent<Dancer>().Partner;
+                Vector3 lineVec3 = partner.transform.position - transform.position;
+                Vector3 crossVec1and2 = Vector3.Cross(partner.transform.forward, transform.forward);
+                Vector3 crossVec3and2 = Vector3.Cross(lineVec3, transform.forward);
+                float planarFactor = Vector3.Dot(lineVec3, crossVec1and2);
+
+                if (gameObject.name == "Dancer1Right")
+                {
+                    Debug.Log($"CompleteCondition {Mathf.Approximately(planarFactor, 0f)} {Mathf.Approximately(crossVec1and2.sqrMagnitude, 0f)}");
+                }
+                return (Mathf.Approximately(planarFactor, 0f) &&
+                        !Mathf.Approximately(crossVec1and2.sqrMagnitude, 0f));
+            case CompleteCondition.TargetMet:
+                if (gameObject.name == "Dancer1Right")
+                {
+                    Debug.Log($"{Vector3.Distance(targetGameObject.transform.position, transform.position)}");
+                }
+                return Vector3.Distance(targetGameObject.transform.position,transform.position) < positionRange;
+        }
+        return false;
+    }
+
     public void DanceUpdate()
     {
         isReadyForNextMove = IsReadyForNextMove();
@@ -211,7 +245,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
             (isMoving || isMovingBackwards) && 
             (
                 ( !doUpdateTargetPosition && (Math.Abs(targetPosition.z - gameObject.transform.position.z) > positionRange || Math.Abs(targetPosition.x - gameObject.transform.position.x) > positionRange)) ||
-                (  doUpdateTargetPosition && (Math.Abs(targetGameObject.transform.position.z - gameObject.transform.position.z) > .36f || Math.Abs(targetGameObject.transform.position.x - gameObject.transform.position.x) > .36f))
+                (  doUpdateTargetPosition && !HasMetCompleteCondition(CompleteCondition))
             )
         )
         {
@@ -262,6 +296,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
             {
                 targetDirection = new Vector3(targetGameObject.transform.position.x - transform.position.x, 0,
                     targetGameObject.transform.position.z - transform.position.z);
+                Debug.DrawRay(transform.position + Vector3.forward, -Vector3.forward, Color.green);
             }
 
             // The step size is equal to speed times frame time.

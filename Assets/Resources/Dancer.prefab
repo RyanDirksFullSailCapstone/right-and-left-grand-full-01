@@ -1498,9 +1498,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba158ff05cf30224f94bfdddec8e7635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angleBuffer: 0
+  isReadyForNextMove: 0
   isFacing: 0
-  positionRange: 0.3
+  positionRange: 0.275
   squareDanceMove: {fileID: 0}
   forwardSpaceTarget: {fileID: 8654058442315772452}
   isMoving: 0
@@ -1512,6 +1512,7 @@ MonoBehaviour:
   m_animator: {fileID: 2160047883329528687}
   m_rigidBody: {fileID: 2160047883329528673}
   m_controlMode: 2
+  doUpdateTargetPosition: 0
 --- !u!114 &8868741798738850475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1552,7 +1553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 2160047882234870689}
   avatarIKPartnerHand: 0
-  squareDanceMove: {fileID: 0}
+  movingAs: 1
 --- !u!65 &4634351847118533979
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1594,6 +1595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21065828783ae45449345a765a6fffb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastCall: 
 --- !u!1 &2922353393800247722
 GameObject:
   m_ObjectHideFlags: 0

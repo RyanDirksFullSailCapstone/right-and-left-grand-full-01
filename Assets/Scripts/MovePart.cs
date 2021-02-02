@@ -15,6 +15,12 @@ public enum HandPosition
     ArmAround
 }
 
+public enum CompleteCondition
+{
+    SeePartner,
+    TargetMet
+}
+
 public class MovePart
 {
 
@@ -31,7 +37,7 @@ public class MovePart
     public Vector3 RightHandTarget { get; private set; }
     public bool DoUpdateTargetPosition { get; private set; }
 
-
+    public CompleteCondition CompleteCondition { get; private set; }
 
     public MovePart(string name, Vector3 target, MoveAs doMovePartAs,bool isBackingUp, bool isPositionChange, bool isChangeRotationInPlace)
     {
@@ -46,7 +52,7 @@ public class MovePart
         DoUpdateTargetPosition = false;
     }
 
-    public MovePart(string name, Vector3 target, MoveAs doMovePartAs, bool isBackingUp, bool isPositionChange, bool isChangeRotationInPlace, HandPosition leftHandPosition, Vector3 leftHandTarget, GameObject targetGameObject, bool doUpdateTargetPosition)
+    public MovePart(string name, Vector3 target, MoveAs doMovePartAs, bool isBackingUp, bool isPositionChange, bool isChangeRotationInPlace, HandPosition leftHandPosition, Vector3 leftHandTarget, GameObject targetGameObject, bool doUpdateTargetPosition, CompleteCondition completeCondition)
     {
         Name = name;
         Target = target;
@@ -58,5 +64,6 @@ public class MovePart
         LeftHandTarget = leftHandTarget;
         TargetGameObject = targetGameObject;
         DoUpdateTargetPosition = doUpdateTargetPosition;
+        CompleteCondition = CompleteCondition;
     }
 }

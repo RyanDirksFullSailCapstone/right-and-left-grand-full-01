@@ -48,16 +48,18 @@ public class MovePartsPopper : MonoBehaviour
                     if (nextPart > currentPart)
                     {
                         currentPart++;
-                        MyMover.setFacingTarget(MyMovePartsQueue.ToArray()[currentPart].Target);
-                        MyMover.setTargetPosition(MyMovePartsQueue.ToArray()[currentPart].Target);
-                        MyMover.isFacing = MyMovePartsQueue.ToArray()[currentPart].IsChangeRotationInPlace;
-                        MyMover.isMoving = (!MyMovePartsQueue.ToArray()[currentPart].IsBackingUp && MyMovePartsQueue.ToArray()[currentPart].IsPositionChange);
-                        MyMover.isMovingBackwards = MyMovePartsQueue.ToArray()[currentPart].IsBackingUp;
-                        MyMover.setMovingAs( MyMovePartsQueue.ToArray()[currentPart].DoMovePartAs);
-                        MyMover.leftHandPosition = MyMovePartsQueue.ToArray()[currentPart].LeftHandPosition;
-                        MyMover.leftHandTarget = MyMovePartsQueue.ToArray()[currentPart].LeftHandTarget;
-                        MyMover.doUpdateTargetPosition = MyMovePartsQueue.ToArray()[currentPart].DoUpdateTargetPosition;
-                        MyMover.targetGameObject = MyMovePartsQueue.ToArray()[currentPart].TargetGameObject;
+                        MovePart thisMovePart = MyMovePartsQueue.ToArray()[currentPart];
+                        MyMover.setFacingTarget(thisMovePart.Target);
+                        MyMover.setTargetPosition(thisMovePart.Target);
+                        MyMover.isFacing = thisMovePart.IsChangeRotationInPlace;
+                        MyMover.isMoving = (!thisMovePart.IsBackingUp && thisMovePart.IsPositionChange);
+                        MyMover.isMovingBackwards = thisMovePart.IsBackingUp;
+                        MyMover.setMovingAs( thisMovePart.DoMovePartAs);
+                        MyMover.leftHandPosition = thisMovePart.LeftHandPosition;
+                        MyMover.leftHandTarget = thisMovePart.LeftHandTarget;
+                        MyMover.doUpdateTargetPosition = thisMovePart.DoUpdateTargetPosition;
+                        MyMover.targetGameObject = thisMovePart.TargetGameObject;
+                        MyMover.CompleteCondition = thisMovePart.CompleteCondition;
                     }
                     else
                         isMoving = false;
@@ -89,8 +91,8 @@ public class MovePartsPopper : MonoBehaviour
                 MyMovePartsQueue.Add(new MovePart(message.EventName, gameObject.GetComponent<Dancer>().Corner.transform.position, MoveAs.Dancer, false, false, true));
                 // Motion Pinwheel around left forearm grip
                 // walk around them 
-                MyMovePartsQueue.Add(new MovePart(message.EventName, gameObject.GetComponent<Dancer>().Corner.GetComponent<DancerTargets>().ForwardSpaceTarget.transform.position, MoveAs.Dancer, false, true, false, HandPosition.ForearmGrip, gameObject.GetComponent<Dancer>().Corner.GetComponent<Dancer>().LeftHandTarget.transform.position, gameObject.GetComponent<Dancer>().Corner.GetComponent<DancerTargets>().LeftSpaceTarget, true));
-                MyMovePartsQueue.Add(new MovePart(message.EventName,Vector3.positiveInfinity, MoveAs.Dancer, false, true, false, HandPosition.ForearmGrip, gameObject.GetComponent<Dancer>().Corner.GetComponent<Dancer>().LeftHandTarget.transform.position, gameObject.GetComponent<Dancer>().Corner.GetComponent<DancerTargets>().BackwardSpaceTarget, true));
+                MyMovePartsQueue.Add(new MovePart(message.EventName, gameObject.GetComponent<Dancer>().Corner.GetComponent<DancerTargets>().ForwardSpaceTarget.transform.position, MoveAs.Dancer, false, true, false, HandPosition.ForearmGrip, gameObject.GetComponent<Dancer>().Corner.GetComponent<Dancer>().LeftHandTarget.transform.position, gameObject.GetComponent<Dancer>().Corner.GetComponent<DancerTargets>().LeftSpaceTarget, true,CompleteCondition.TargetMet));
+                MyMovePartsQueue.Add(new MovePart(message.EventName,Vector3.positiveInfinity, MoveAs.Dancer, false, true, false, HandPosition.ForearmGrip, gameObject.GetComponent<Dancer>().Corner.GetComponent<Dancer>().LeftHandTarget.transform.position, gameObject.GetComponent<Dancer>().Corner.GetComponent<DancerTargets>().BackwardSpaceTarget, true,CompleteCondition.SeePartner));
 
 
                 // IsComplete: facepartner
