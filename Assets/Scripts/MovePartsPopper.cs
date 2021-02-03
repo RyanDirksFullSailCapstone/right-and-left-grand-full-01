@@ -67,7 +67,7 @@ public class MovePartsPopper : MonoBehaviour
             }
         }
     }
-
+        
     private void OnEnable()
     {
         //Start listening for game events

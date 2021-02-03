@@ -170,7 +170,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
     }
 
     public CompleteCondition CompleteCondition { get; set; }
-
+    RaycastHit hit;
     private bool HasMetCompleteCondition(CompleteCondition completeCondition)
     {
         if (gameObject.name == "Dancer1Right")
@@ -180,18 +180,18 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         switch (completeCondition)
         {
             case CompleteCondition.SeePartner:
-                GameObject partner = gameObject.GetComponent<Dancer>().Partner;
-                Vector3 lineVec3 = partner.transform.position - transform.position;
-                Vector3 crossVec1and2 = Vector3.Cross(partner.transform.forward, transform.forward);
-                Vector3 crossVec3and2 = Vector3.Cross(lineVec3, transform.forward);
-                float planarFactor = Vector3.Dot(lineVec3, crossVec1and2);
-
-                if (gameObject.name == "Dancer1Right")
+                Debug.DrawRay(transform.position + Vector3.up * .5f, transform.forward*2f + (gameObject.GetComponent<Dancer>().DancerLeftToken.activeSelf ? -transform.right : transform.right) * 2f, Color.green);
+                Ray ray = new Ray(transform.position + Vector3.up * .5f, transform.forward * 2f + (gameObject.GetComponent<Dancer>().DancerLeftToken.activeSelf?-transform.right:transform.right) * 2f);
+                if (Physics.Raycast(ray, out hit, 1f))
                 {
-                    Debug.Log($"CompleteCondition {Mathf.Approximately(planarFactor, 0f)} {Mathf.Approximately(crossVec1and2.sqrMagnitude, 0f)}");
+                    Debug.Log($"{gameObject.name} sees {hit.collider.gameObject.name}, looking for {gameObject.GetComponent<Dancer>().Partner.name} found={hit.collider.gameObject.name == gameObject.GetComponent<Dancer>().Partner.name}");
+                    if (hit.collider.gameObject.name == gameObject.GetComponent<Dancer>().Partner.name)
+                    {
+                        Debug.Log($"{gameObject.name} CompleteCondition true");
+                        return true;
+                    }
                 }
-                return (Mathf.Approximately(planarFactor, 0f) &&
-                        !Mathf.Approximately(crossVec1and2.sqrMagnitude, 0f));
+                return false;
             case CompleteCondition.TargetMet:
                 if (gameObject.name == "Dancer1Right")
                 {
@@ -296,7 +296,6 @@ public class SimpleSampleCharacterControl : MonoBehaviour
             {
                 targetDirection = new Vector3(targetGameObject.transform.position.x - transform.position.x, 0,
                     targetGameObject.transform.position.z - transform.position.z);
-                Debug.DrawRay(transform.position + Vector3.forward, -Vector3.forward, Color.green);
             }
 
             // The step size is equal to speed times frame time.
@@ -308,7 +307,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
                 Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
 
                 // Draw a ray pointing at our target in
-                Debug.DrawRay(transform.position, newDirection, Color.red);
+                //Debug.DrawRay(transform.position, newDirection, Color.red);
 
                 // Calculate a rotation a step closer to the target and applies rotation to this object
                 transform.rotation = Quaternion.LookRotation(newDirection);
