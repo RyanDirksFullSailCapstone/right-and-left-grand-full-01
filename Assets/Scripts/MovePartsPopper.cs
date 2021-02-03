@@ -53,23 +53,26 @@ public class MovePartsPopper : MonoBehaviour
                         currentPart++;
                         MovePart thisMovePart = MyMovePartsQueue[currentPart];
                         doingMovePart = thisMovePart.Name;
-                        MyMover.CompleteCondition = thisMovePart.CompleteCondition;
-                        if (doingMovePart.Contains("go to your partner"))
+                        if (doingMovePart == "Reset The Square")
                         {
-                            Debug.Log($"movePart {doingMovePart} CompleteCondition:{thisMovePart.CompleteCondition}");
+                            Floor thisFloor = GameObject.Find("floor").GetComponent<Floor>();
+                            thisFloor.ResetSquare();
                         }
-
-                        MyMover.thisMovePart = doingMovePart;
-                        MyMover.setFacingTarget(thisMovePart.Target);
-                        MyMover.setTargetPosition(thisMovePart.Target);
-                        MyMover.isFacing = thisMovePart.IsChangeRotationInPlace;
-                        MyMover.isMoving = (!thisMovePart.IsBackingUp && thisMovePart.IsPositionChange);
-                        MyMover.isMovingBackwards = thisMovePart.IsBackingUp;
-                        MyMover.setMovingAs( thisMovePart.DoMovePartAs);
-                        MyMover.leftHandPosition = thisMovePart.LeftHandPosition;
-                        MyMover.leftHandTarget = thisMovePart.LeftHandTarget;
-                        MyMover.doUpdateTargetPosition = thisMovePart.DoUpdateTargetPosition;
-                        MyMover.targetGameObject = thisMovePart.TargetGameObject;
+                        else
+                        {
+                            MyMover.CompleteCondition = thisMovePart.CompleteCondition;
+                            MyMover.thisMovePart = doingMovePart;
+                            MyMover.setFacingTarget(thisMovePart.Target);
+                            MyMover.setTargetPosition(thisMovePart.Target);
+                            MyMover.isFacing = thisMovePart.IsChangeRotationInPlace;
+                            MyMover.isMoving = (!thisMovePart.IsBackingUp && thisMovePart.IsPositionChange);
+                            MyMover.isMovingBackwards = thisMovePart.IsBackingUp;
+                            MyMover.setMovingAs(thisMovePart.DoMovePartAs);
+                            MyMover.leftHandPosition = thisMovePart.LeftHandPosition;
+                            MyMover.leftHandTarget = thisMovePart.LeftHandTarget;
+                            MyMover.doUpdateTargetPosition = thisMovePart.DoUpdateTargetPosition;
+                            MyMover.targetGameObject = thisMovePart.TargetGameObject;
+                        }
                     }
                     else
                         isMoving = false;
@@ -103,29 +106,11 @@ public class MovePartsPopper : MonoBehaviour
                 // walk around them 
                 MyMovePartsQueue.Add(new MovePart("walk around a left forearm grip", gameObject.GetComponent<Dancer>().Corner.GetComponent<DancerTargets>().ForwardSpaceTarget.transform.position, MoveAs.Dancer, false, true, false, HandPosition.ForearmGrip, gameObject.GetComponent<Dancer>().Corner.GetComponent<Dancer>().LeftHandTarget.transform.position, gameObject.GetComponent<Dancer>().Corner.GetComponent<DancerTargets>().LeftSpaceTarget, true,CompleteConditionType.TargetMet));
                 MyMovePartsQueue.Add(new MovePart("until you see your partner",Vector3.positiveInfinity, MoveAs.Dancer, false, true, false, HandPosition.ForearmGrip, gameObject.GetComponent<Dancer>().Corner.GetComponent<Dancer>().LeftHandTarget.transform.position, gameObject.GetComponent<Dancer>().Corner.GetComponent<DancerTargets>().BackwardSpaceTarget, true,CompleteConditionType.SeePartner));
-                //MyMovePartsQueue.Add(new MovePart("then go to your partner", Vector3.positiveInfinity, MoveAs.Dancer, false, true, false, HandPosition.None, transform.position, gameObject.GetComponent<Dancer>().Partner, true,CompleteCondition.TargetMet));
-                //MyMovePartsQueue.Add(new MovePart("face partner", gameObject.GetComponent<Dancer>().Partner.transform.position, MoveAs.Dancer, false, false, true));
                 MyMovePartsQueue.Add(new MovePart("move forward", gameObject.GetComponent<DancerTargets>().ForwardSpaceTarget.transform.position, MoveAs.Dancer, false, true, false));
-                MyMovePartsQueue.Add(new MovePart(message.EventName, gameObject.GetComponent<Dancer>().FacingInTarget.transform.position, MoveAs.Couple, false, false, true));
-                //MyMovePartsQueue.Add(new MovePart("move forward", gameObject.GetComponent<DancerTargets().ForwardSpaceTarget.transform.position, MoveAs.Couple, false, true, false));
-                //MyMovePartsQueue.Add(new MovePart(
-                //    "go to your partner",
-                //    gameObject.GetComponent<Dancer>().Partner.GetComponent<DancerTargets>().ForwardSpaceTarget.transform.position,
-                //    MoveAs.Dancer,
-                //    false,
-                //    true,
-                //    false,
-                //    HandPosition.None,
-                //    gameObject.GetComponent<Dancer>().Partner.GetComponent<Dancer>().LeftHandTarget.transform.position,
-                //    gameObject.GetComponent<Dancer>().Partner.GetComponent<DancerTargets>().RightSpaceTarget,
-                //    true,
-                //    CompleteConditionType.TargetMet));
-                //Debug.Log($"LastMovePart:{MyMovePartsQueue[MyMovePartsQueue.Count-1].Name} Complete at {MyMovePartsQueue[MyMovePartsQueue.Count - 1].CompleteCondition}");
-
-
-                // IsComplete: facepartner
-                // MyMovePartsQueue.Add(new MovePart(message.EventName, gameObject.GetComponent<Dancer>().Partner.transform.position, MoveAs.Dancer, false, false, true));
-
+                MyMovePartsQueue.Add(new MovePart("move forward", gameObject.GetComponent<DancerTargets>().ForwardSpaceTarget.transform.position, MoveAs.Couple, false, true, false));
+                MyMovePartsQueue.Add(new MovePart("Face in", gameObject.GetComponent<Dancer>().FacingInTarget.transform.position, MoveAs.Couple, false, false, true)); 
+                MyMovePartsQueue.Add(new MovePart("Back up", gameObject.GetComponent<DancerTargets>().BackwardSpaceTarget.transform.position, MoveAs.Couple, true, true, false));
+                MyMovePartsQueue.Add(new MovePart("Reset The Square", gameObject.GetComponent<DancerTargets>().ForwardSpaceTarget.transform.position, MoveAs.Dancer, false, true, false));
                 break;
             case "FaceCorner":
                 MyMovePartsQueue.Add(new MovePart(message.EventName,gameObject.GetComponent<Dancer>().Corner.transform.position,MoveAs.Dancer,false,false,true));
