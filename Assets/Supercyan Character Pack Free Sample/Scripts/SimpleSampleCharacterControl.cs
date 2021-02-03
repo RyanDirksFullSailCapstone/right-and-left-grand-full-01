@@ -181,15 +181,20 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         {
             case CompleteCondition.SeePartner:
                 Debug.DrawRay(transform.position + Vector3.up * .5f, transform.forward*2f + (gameObject.GetComponent<Dancer>().DancerLeftToken.activeSelf ? -transform.right : transform.right) * 2f, Color.green);
-                Ray ray = new Ray(transform.position + Vector3.up * .5f, transform.forward * 2f + (gameObject.GetComponent<Dancer>().DancerLeftToken.activeSelf?-transform.right:transform.right) * 2f);
-                if (Physics.Raycast(ray, out hit, 1f))
+                RaycastHit[] hits;
+                hits = Physics.RaycastAll(transform.position + Vector3.up * .5f, transform.forward * 2f + (gameObject.GetComponent<Dancer>().DancerLeftToken.activeSelf ? -transform.right : transform.right) * 2f,2.5f);
+                for (int i = 0; i < hits.Length; i++)
                 {
-                    Debug.Log($"{gameObject.name} sees {hit.collider.gameObject.name}, looking for {gameObject.GetComponent<Dancer>().Partner.name} found={hit.collider.gameObject.name == gameObject.GetComponent<Dancer>().Partner.name}");
-                    if (hit.collider.gameObject.name == gameObject.GetComponent<Dancer>().Partner.name)
-                    {
-                        Debug.Log($"{gameObject.name} CompleteCondition true");
-                        return true;
-                    }
+                    RaycastHit hit = hits[i];
+                    string seenDancerName = hit.transform.gameObject.name;
+                    //if (seenDancer)
+                    //{
+                        if (seenDancerName == gameObject.GetComponent<Dancer>().Partner.name)
+                        {
+                            Debug.Log($"{gameObject.name} CompleteCondition true");
+                            return true;
+                        }
+                    //}
                 }
                 return false;
             case CompleteCondition.TargetMet:
