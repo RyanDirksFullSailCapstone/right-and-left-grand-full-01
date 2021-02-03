@@ -1501,7 +1501,7 @@ MonoBehaviour:
   isReadyForNextMove: 0
   isFacing: 0
   positionRange: 0.275
-  squareDanceMove: {fileID: 0}
+  thisMovePart: 
   forwardSpaceTarget: {fileID: 8654058442315772452}
   isMoving: 0
   isMovingBackwards: 0
@@ -1595,7 +1595,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21065828783ae45449345a765a6fffb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextPart: -1
+  currentPart: -1
+  lastPartIndex: 0
+  isMoving: 0
   lastCall: 
+  doingMovePart: 
 --- !u!1 &2922353393800247722
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,12 +6,14 @@ using Doozy.Engine;
 public class MovePartsPopper : MonoBehaviour
 {
     private List<MovePart> MyMovePartsQueue = new List<MovePart>();
-    private int nextPart = -1;
-    private int currentPart = -1;
-    private bool isMoving;
+    public int nextPart = -1;
+    public int currentPart = -1;
+    public int lastPartIndex;
+    public bool isMoving;
     private SimpleSampleCharacterControl MyMover;
 
     public string lastCall;
+    public string doingMovePart;
 
 // Start is called before the first frame update
     void Start()
@@ -24,6 +26,7 @@ public class MovePartsPopper : MonoBehaviour
     void Update()
     {
         int LastPartIndex = MyMovePartsQueue.Count - 1;
+        lastPartIndex = LastPartIndex;
         //if (gameObject.name == "Dancer1Right")
         //{
         //    Debug.Log($"lastpartindex:{LastPartIndex}");
@@ -48,7 +51,15 @@ public class MovePartsPopper : MonoBehaviour
                     if (nextPart > currentPart)
                     {
                         currentPart++;
-                        MovePart thisMovePart = MyMovePartsQueue.ToArray()[currentPart];
+                        MovePart thisMovePart = MyMovePartsQueue[currentPart];
+                        doingMovePart = thisMovePart.Name;
+                        MyMover.CompleteCondition = thisMovePart.CompleteCondition;
+                        if (doingMovePart.Contains("go to your partner"))
+                        {
+                            Debug.Log($"movePart {doingMovePart} CompleteCondition:{thisMovePart.CompleteCondition}");
+                        }
+
+                        MyMover.thisMovePart = doingMovePart;
                         MyMover.setFacingTarget(thisMovePart.Target);
                         MyMover.setTargetPosition(thisMovePart.Target);
                         MyMover.isFacing = thisMovePart.IsChangeRotationInPlace;
@@ -59,7 +70,6 @@ public class MovePartsPopper : MonoBehaviour
                         MyMover.leftHandTarget = thisMovePart.LeftHandTarget;
                         MyMover.doUpdateTargetPosition = thisMovePart.DoUpdateTargetPosition;
                         MyMover.targetGameObject = thisMovePart.TargetGameObject;
-                        MyMover.CompleteCondition = thisMovePart.CompleteCondition;
                     }
                     else
                         isMoving = false;
@@ -88,11 +98,29 @@ public class MovePartsPopper : MonoBehaviour
         {
             case "AllemandeLeft":
                 //face corner
-                MyMovePartsQueue.Add(new MovePart(message.EventName, gameObject.GetComponent<Dancer>().Corner.transform.position, MoveAs.Dancer, false, false, true));
+                MyMovePartsQueue.Add(new MovePart("face your corner", gameObject.GetComponent<Dancer>().Corner.transform.position, MoveAs.Dancer, false, false, true));
                 // Motion Pinwheel around left forearm grip
                 // walk around them 
-                MyMovePartsQueue.Add(new MovePart(message.EventName, gameObject.GetComponent<Dancer>().Corner.GetComponent<DancerTargets>().ForwardSpaceTarget.transform.position, MoveAs.Dancer, false, true, false, HandPosition.ForearmGrip, gameObject.GetComponent<Dancer>().Corner.GetComponent<Dancer>().LeftHandTarget.transform.position, gameObject.GetComponent<Dancer>().Corner.GetComponent<DancerTargets>().LeftSpaceTarget, true,CompleteCondition.TargetMet));
-                MyMovePartsQueue.Add(new MovePart(message.EventName,Vector3.positiveInfinity, MoveAs.Dancer, false, true, false, HandPosition.ForearmGrip, gameObject.GetComponent<Dancer>().Corner.GetComponent<Dancer>().LeftHandTarget.transform.position, gameObject.GetComponent<Dancer>().Corner.GetComponent<DancerTargets>().BackwardSpaceTarget, true,CompleteCondition.SeePartner));
+                MyMovePartsQueue.Add(new MovePart("walk around a left forearm grip", gameObject.GetComponent<Dancer>().Corner.GetComponent<DancerTargets>().ForwardSpaceTarget.transform.position, MoveAs.Dancer, false, true, false, HandPosition.ForearmGrip, gameObject.GetComponent<Dancer>().Corner.GetComponent<Dancer>().LeftHandTarget.transform.position, gameObject.GetComponent<Dancer>().Corner.GetComponent<DancerTargets>().LeftSpaceTarget, true,CompleteConditionType.TargetMet));
+                MyMovePartsQueue.Add(new MovePart("until you see your partner",Vector3.positiveInfinity, MoveAs.Dancer, false, true, false, HandPosition.ForearmGrip, gameObject.GetComponent<Dancer>().Corner.GetComponent<Dancer>().LeftHandTarget.transform.position, gameObject.GetComponent<Dancer>().Corner.GetComponent<DancerTargets>().BackwardSpaceTarget, true,CompleteConditionType.SeePartner));
+                //MyMovePartsQueue.Add(new MovePart("then go to your partner", Vector3.positiveInfinity, MoveAs.Dancer, false, true, false, HandPosition.None, transform.position, gameObject.GetComponent<Dancer>().Partner, true,CompleteCondition.TargetMet));
+                //MyMovePartsQueue.Add(new MovePart("face partner", gameObject.GetComponent<Dancer>().Partner.transform.position, MoveAs.Dancer, false, false, true));
+                MyMovePartsQueue.Add(new MovePart("move forward", gameObject.GetComponent<DancerTargets>().ForwardSpaceTarget.transform.position, MoveAs.Dancer, false, true, false));
+                MyMovePartsQueue.Add(new MovePart(message.EventName, gameObject.GetComponent<Dancer>().FacingInTarget.transform.position, MoveAs.Couple, false, false, true));
+                //MyMovePartsQueue.Add(new MovePart("move forward", gameObject.GetComponent<DancerTargets().ForwardSpaceTarget.transform.position, MoveAs.Couple, false, true, false));
+                //MyMovePartsQueue.Add(new MovePart(
+                //    "go to your partner",
+                //    gameObject.GetComponent<Dancer>().Partner.GetComponent<DancerTargets>().ForwardSpaceTarget.transform.position,
+                //    MoveAs.Dancer,
+                //    false,
+                //    true,
+                //    false,
+                //    HandPosition.None,
+                //    gameObject.GetComponent<Dancer>().Partner.GetComponent<Dancer>().LeftHandTarget.transform.position,
+                //    gameObject.GetComponent<Dancer>().Partner.GetComponent<DancerTargets>().RightSpaceTarget,
+                //    true,
+                //    CompleteConditionType.TargetMet));
+                //Debug.Log($"LastMovePart:{MyMovePartsQueue[MyMovePartsQueue.Count-1].Name} Complete at {MyMovePartsQueue[MyMovePartsQueue.Count - 1].CompleteCondition}");
 
 
                 // IsComplete: facepartner

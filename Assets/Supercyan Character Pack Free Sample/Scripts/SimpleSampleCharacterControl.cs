@@ -26,7 +26,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
     public bool isReadyForNextMove;
     public bool isFacing = false;
     public float positionRange = 0.5f;
-    public GameObject squareDanceMove;
+    public string thisMovePart;
     public GameObject forwardSpaceTarget;
     private Vector3 targetPosition;
     private Vector3 facingTarget;
@@ -169,9 +169,9 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         m_jumpInput = false;
     }
 
-    public CompleteCondition CompleteCondition { get; set; }
+    public CompleteConditionType CompleteCondition { get; set; }
     RaycastHit hit;
-    private bool HasMetCompleteCondition(CompleteCondition completeCondition)
+    private bool HasMetCompleteCondition(CompleteConditionType completeCondition)
     {
         if (gameObject.name == "Dancer1Right")
         {
@@ -179,8 +179,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         }
         switch (completeCondition)
         {
-            case CompleteCondition.SeePartner:
-                Debug.DrawRay(transform.position + Vector3.up * .5f, transform.forward*2f + (gameObject.GetComponent<Dancer>().DancerLeftToken.activeSelf ? -transform.right : transform.right) * 2f, Color.green);
+            case CompleteConditionType.SeePartner:
                 RaycastHit[] hits;
                 hits = Physics.RaycastAll(transform.position + Vector3.up * .5f, transform.forward * 2f + (gameObject.GetComponent<Dancer>().DancerLeftToken.activeSelf ? -transform.right : transform.right) * 2f,2.5f);
                 for (int i = 0; i < hits.Length; i++)
@@ -191,13 +190,12 @@ public class SimpleSampleCharacterControl : MonoBehaviour
                     //{
                         if (seenDancerName == gameObject.GetComponent<Dancer>().Partner.name)
                         {
-                            Debug.Log($"{gameObject.name} CompleteCondition true");
                             return true;
                         }
                     //}
                 }
                 return false;
-            case CompleteCondition.TargetMet:
+            case CompleteConditionType.TargetMet:
                 if (gameObject.name == "Dancer1Right")
                 {
                     Debug.Log($"{Vector3.Distance(targetGameObject.transform.position, transform.position)}");
@@ -245,6 +243,11 @@ public class SimpleSampleCharacterControl : MonoBehaviour
             }
         }
 
+        if (thisMovePart.Contains("go to your partner"))
+        {
+            Debug.Log($"thisMovePart {thisMovePart} isMoving {isMoving} HasMet{CompleteCondition} {HasMetCompleteCondition(CompleteCondition)}");
+        }
+
         // while isMoving && not at target
         if ( 
             (isMoving || isMovingBackwards) && 
@@ -254,6 +257,10 @@ public class SimpleSampleCharacterControl : MonoBehaviour
             )
         )
         {
+            if (thisMovePart.Contains("go to your partner"))
+            {
+                Debug.Log($"DOING thisMovePart {thisMovePart} isMoving {isMoving} HasMet{CompleteCondition} {HasMetCompleteCondition(CompleteCondition)}");
+            }
             //if (gameObject.name == "Dancer1Right")
             //{
             //    Debug.Log($"{Math.Abs(targetGameObject.transform.position.z - gameObject.transform.position.z)} {Math.Abs(targetGameObject.transform.position.x - gameObject.transform.position.x)} {doUpdateTargetPosition} {(Math.Abs(targetPosition.z - gameObject.transform.position.z) > positionRange || Math.Abs(targetPosition.x - gameObject.transform.position.x) > positionRange)} {(Math.Abs(targetGameObject.transform.position.z - gameObject.transform.position.z) > positionRange || Math.Abs(targetGameObject.transform.position.x - gameObject.transform.position.x) > positionRange)}");

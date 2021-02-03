@@ -48,7 +48,7 @@ public class Dancer : MonoBehaviour
     // https://www.youtube.com/watch?v=c69oZprM1oc&feature=emb_logo
     void OnMouseDown()
     {
-        Selected.active = !Selected.active;
+        //Selected.active = !Selected.active;
     }
 
     void Update()
